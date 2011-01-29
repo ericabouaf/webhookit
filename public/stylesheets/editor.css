@@ -1,0 +1,39 @@
+#WiringEditor-runButton button {
+	background: transparent url(/javascripts/WireIt/plugins/editor/assets/bullet_go.png) no-repeat scroll 10% 50%;
+	font-weight: bold;
+}
+
+#WiringEditor-templateButton.yui-button button {
+	background: transparent url(/images/icons/script_edit.png) no-repeat scroll 10% 50%;
+	padding-left: 28px;
+}
+
+
+div.WireIt-Container div.inputEx-Group div.inputEx-label {	width: auto;}
+div.inputEx-TypeField-PropertiesPanel {	z-index: 7;}
+
+/* Comment Module */
+div.WireIt-Container.WiringEditor-module-comment { width: 200px; }
+div.WireIt-Container.WiringEditor-module-comment div.body { background-color: #EEEE66; }
+div.WireIt-Container.WiringEditor-module-comment div.body textarea { background-color: transparent; font-weight: bold; border: 0; }
+
+div.WireIt-InputExTerminal { position: relative ;}
+
+/* Composed Module */
+/*div.ComposedModule { background-color: #DDDDAA; }*/
+
+div.savedStatus {
+	left:600px;
+}
+
+
+
+#appLoading {
+	font-size: 18px;
+	font-weight: bold;
+	padding: 20px;
+	border: 1px solid #CCC;
+	background-color: #DDD;
+	width: 400px;
+	margin: 60px auto;
+}

@@ -1,0 +1,50 @@
+
+/* Wiring */
+div.wiring { background-color: #F5F5F5; border:1px solid #DDDDDD; margin: 0 0 10px 0; width: 100%; position: relative;}
+div.wiring .meta { background-color:#FAFAFA; border-top:1px solid #DDDDDD; color:#999999; font-size: 80%; padding:3px 11px; }
+div.wiring h3 { padding-left:10px; margin-top: 5px; }
+div.wiring p.user { font-style: italic; padding-left:10px; margin-top: 5px; color: #888888; font-size: 90%; margin-bottom: 0;}
+div.wiring p.description { padding-left:10px; margin-top: 5px; margin-bottom: 5px;}
+div.wiring ul.links { position: absolute; top: 10px; right: 10px; }
+div.wiring ul.links li { display:inline; list-style-type:none; margin:0 0 0 4px; font-size: 80%;}
+
+/* Wiring list */
+#wirings div.wiring ul.links { display: none;  }
+#wirings div.wiring:hover ul.links { display: block; }
+
+/* Box */
+div.box {background-color: #F5F5F5; border:1px solid #DDDDDD; margin: 0 0 10px 0; width: 100%;padding: 10px;}
+
+/* run form */
+#runButton { font-size: 200%; }
+
+/* User */
+div.userinfos {float: left; width: 250px; border: 1px solid #ccc; padding: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;}
+img.gravatar {float: left;border:1px solid #DDDDDD;
+margin-right:5px;
+padding:2px;
+position:relative;
+top:-2px;
+vertical-align:middle;}
+
+
+/* Donate */
+#donate { 
+	float: left; 
+	width: 250px; 
+	margin: 20px; 
+	border: 1px solid #ccc; 
+	background-color: #DDD; 
+	padding: 10px; 
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+
+/* Activities*/
+div.activity {
+	background-color: #F5F5F5; 
+	border:1px solid #DDDDDD; 
+	margin: 0 0 10px 0;
+	padding: 10px;
+}

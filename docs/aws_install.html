@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="custom-modules.html">Custom Modules</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h1>Installation on an Amazon EC2 instance</h1>
+<p>We'll set it up on a Amazon EC2 instance, through the NginX webserver (as a simple HTTP Proxy).</p>
+
+<h2 id="Installation">Installation</h2>
+
+<ul>
+<li>Have a AWS account up and running.</li>
+<li>Install EC2 tools</li>
+<li><p>Install brew</p>
+
+<p> curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/local --strip 1</p></li>
+<li><p>Install EC2 Api tools</p>
+
+<p> sudo brew install ec2-api-tools</p></li>
+</ul>
+
+
+<h2 id="Configure-the-keypair">Configure the keypair</h2>
+
+<ul>
+<li><p>Generate a key (*.pem file) from the AWS console</p>
+
+<p> mkdir ~/.ec2
+ cp mykey.pem ~/.ec2
+ chmod 400 ~/.ec2/mykey.pem</p>
+
+<pre><code> # add this to your .ssh/config
+   Host *.amazonaws.com
+     IdentityFile ~/.ec2/ec2-keypair.pem
+     User ubuntu
+     UserKnownHostsFile /dev/null
+     StrictHostKeyChecking no
+
+ # allow ssh and http
+ ec2-authorize default -p 22 -p 80
+</code></pre></li>
+</ul>
+
+
+<h2 id="EC2-Launch-script">EC2 Launch script</h2>
+
+<p>If you have the ec2 tools installed (I'd recommend <a href="http://github.com/mxcl/homebrew">brew</a>), and you have your credential environment variables in place, you can run this script to launch an ec2 instance. It's using a Base Debian Lenny AMI:</p>
+
+<p>http://github.com/mikehale/ec2-autoscale/blob/master/ec2_commands</p>
+
+<h2 id="Install">Install</h2>
+
+<p>Copy scripts/install.sh to your server</p>
+
+<p>It installs NginX, Node.js, mongoDB, npm (and some node libs)</p>
+
+<h2 id="TODO-Monit">TODO: Monit</h2>
+
+<p>http://howtonode.org/deploying-node-upstart-monit</p>
+
+<pre>
+#!/bin/sh
+#
+# Install all dependencies on a Debian 
+#
+
+apt-get update
+apt-get upgrade -y
+
+apt-get install -y build-essential git-core nginx libssl-dev pkg-config
+
+# Node.js
+wget http://nodejs.org/dist/node-v0.2.5.tar.gz
+tar xvzf node-v0.2.5.tar.gz
+cd node-v0.2.5
+./configure
+make
+make install
+cd ..
+node-v0.2.5.tar.gz
+
+# NPM
+curl http://npmjs.org/install.sh | sh
+
+# MongoDB
+wget http://fastdl.mongodb.org/linux/mongodb-linux-i686-1.6.3.tgz
+tar xvzf mongodb-linux-i686-1.6.3.tgz
+rm mongodb-linux-i686-1.6.3.tgz
+mkdir -p /data/db
+/root/mongodb-linux-i686-1.6.3/bin/mongod &
+
+# Config
+adduser --system --shell /bin/bash \
+        --gecos 'User for running node.js projects' \
+        --group --disabled-password --home /home/node nodejs
+
+# Add ubuntu user to the nodejs group
+# /usr/sbin/usermod -a -G nodejs ubuntu
+
+# Setup basic nginx proxy.
+unlink /etc/nginx/sites-available/default
+cat > /etc/nginx/sites-available/node_proxy.conf <<EOF
+server {
+listen 80;
+# proxy to node
+location / {
+proxy_pass http://127.0.0.1:8124/;
+}
+}
+EOF
+ln -s /etc/nginx/sites-available/node_proxy.conf /etc/nginx/sites-enabled/node_proxy.conf
+/etc/init.d/nginx restart
+</pre>
+
+
+
+
+<pre>
+#!/bin/sh
+
+# debianzone-us-east-1/ami/lenny/base/20100312/32/lenny-base-20100312
+
+ec2-run-instances -t c1.medium -n 1 -g default -k default --user-data-file install-ec2 ami-01d13e68
+</pre>
+
+
+
+
+<pre>
+
+  #!/bin/sh
+
+  tar -cvzf webhookit.tar.gz .
+
+  scp -i ~/.ssh/laptopkey.pem webhookit.tar.gz root@ec2-174-129-182-193.compute-1.amazonaws.com:
+  
+  
+</pre>
+
+
+
+
+</div>
+			</div>
+		</div>
+	</body>
+</html>

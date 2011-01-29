@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="custom-modules.html">Custom Modules</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h1>Installation</h1>
+<h2 id="Node-js">Node.js</h2>
+
+<p>Follow the instructions on <a href="https://github.com/ry/node/wiki/Installation" data-bare-link="true">https://github.com/ry/node/wiki/Installation</a> to install <a href="http://nodejs.org/">Node.js</a></p>
+
+<h2 id="NPM">NPM</h2>
+
+<p><a href="npmjs.org">npm</a> is a package manager for Node.js. It manages dependencies and does other cool stuff.</p>
+
+<pre><code>curl http://npmjs.org/install.sh | sh
+</code></pre>
+
+<h2 id="mongoDB">mongoDB</h2>
+
+<p><a href="http://www.mongodb.org/">MongoDB</a> is a document-oriented database.</p>
+
+<p>Got to <a href="http://www.mongodb.org/downloads" data-bare-link="true">http://www.mongodb.org/downloads</a>, download the appropriate version for your OS, and unpack it.</p>
+
+<h2 id="Starting-the-server">Starting the server</h2>
+
+<p>Launch the mongoDB database</p>
+
+<pre><code>cd mongo/bin
+./mongod
+</code></pre>
+
+<p>Launch the WebHookIt server</p>
+
+<pre><code>cd webhookit
+node server.js
+</code></pre>
+
+<p>By default, it should be running on <a href="http://localhost:8124" data-bare-link="true">http://localhost:8124</a></p>
+
+<h2 id="Production">Production</h2>
+
+<p>When running in production, set the Express.js environment to production</p>
+
+<p>Launch the server in production mode :</p>
+
+<pre><code>$ EXPRESS_ENV=production node server.js
+</code></pre>
+
+<p>You should use an event-loop based HTTP server.
+(ie: Apache-fork not Recommended, use WebHookIt as a standalone server or use something like NginX)</p>
+
+<p>You can optionally configure the web server to serve static files from the /public/ directory.</p>
+
+</div>
+			</div>
+		</div>
+	</body>
+</html>

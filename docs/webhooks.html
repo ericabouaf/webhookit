@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="custom-modules.html">Custom Modules</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h2 id="Webhookit">Webhookit</h2>
+<p class="man-name">
+  <code>webhooks</code>
+</p>
+<p><img src="images/webhooks.png" /></p>
+
+<h2 id="WebHooks">WebHooks</h2>
+
+<h3 id="Introduction">Introduction</h3>
+
+<p>Webhooks are a simple paradigm for developing instant notifications and mashups based on simple HTTP requests.</p>
+
+<p>To learn more about webhooks, take a look at the webhooks blog as well as The Pushbutton Web by Anil Dash. Webhooks champion Jeff Lindsay's excellent slides are a particularly good place to start.</p>
+
+<object height="216" width="380"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4537957&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=d13870&amp;fullscreen=1" /><embed allowfullscreen="true" src="http://vimeo.com/moogaloop.swf?clip_id=4537957&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=d13870&amp;fullscreen=1" allowscriptaccess="always" type="application/x-shockwave-flash" height="216" width="380"></embed></object>
+
+
+
+
+<div id="__ss_1334009" style="width:425px"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/progrium/using-web-hooks" title="Using Web Hooks">Using Web Hooks</a></strong><object id="__sse1334009" height="355" width="425"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=webhooks09-090423134820-phpapp02&stripped_title=using-web-hooks" /><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><embed name="__sse1334009" allowfullscreen="true" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=webhooks09-090423134820-phpapp02&stripped_title=using-web-hooks" allowscriptaccess="always" type="application/x-shockwave-flash" height="355" width="425"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/progrium">Jeff Lindsay</a>.</div></div>
+
+
+
+
+<object height="385" width="480"><param name="movie" value="http://www.youtube.com/v/Fw8EPrIjCOc?fs=1&amp;hl=fr_FR" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed allowfullscreen="true" src="http://www.youtube.com/v/Fw8EPrIjCOc?fs=1&amp;hl=fr_FR" allowscriptaccess="always" type="application/x-shockwave-flash" height="385" width="480"></embed></object>
+
+
+
+
+<div id="__ss_690055" style="width:425px"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/progrium/web-hooks-and-the-programmable-world-of-tomorrow-presentation" title="Web Hooks and the Programmable World of Tomorrow">Web Hooks and the Programmable World of Tomorrow</a></strong><object id="__sse690055" height="355" width="425"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=webhooks08-1224897686362414-8&stripped_title=web-hooks-and-the-programmable-world-of-tomorrow-presentation" /><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><embed name="__sse690055" allowfullscreen="true" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=webhooks08-1224897686362414-8&stripped_title=web-hooks-and-the-programmable-world-of-tomorrow-presentation" allowscriptaccess="always" type="application/x-shockwave-flash" height="355" width="425"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/progrium">Jeff Lindsay</a>.</div></div>
+
+
+<h3 id="Learn-More">Learn More</h3>
+
+<ul>
+<li><a href="http://blog.webhooks.org/">Webooks.org blog</a></li>
+<li><a href="http://webhooks.pbworks.com/">wiki</a></li>
+</ul>
+
+
+</div>
+			</div>
+		</div>
+	</body>
+</html>

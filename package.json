@@ -1,0 +1,36 @@
+{
+    "name": "webhookit",
+    "version": "0.0.1",
+    "description": "WebHookIt",
+    "author": "Eric Abouaf <eric.abouaf@gmail.com>",
+    "bugs": { "web" : "http://github.com/neyric/webhookit/issues" },
+    "os": ["darwin", "linux"],
+    "contributors": [
+        "Eric Abouaf <eric.abouaf@gmail.com> (http://neyric.com)"
+    ],
+    "engines": {
+        "node" : ">=0.2.5"
+    },
+    "directories": {
+        "lib" : "lib"
+    },
+    "bin" : { 
+			"webhookit" : "./server.js"
+		},
+    "dependencies": {
+				"connect": ">=0.3.0",
+				"express": ">=1.0.0",
+				"express-contrib": ">=0.0.1",
+				"mongodb": ">=0.7.9",
+				"cron": ">=0.1.0",
+				"ejs": ">=0.2.0",
+				"xml2js": ">=0.1.5",
+				"email": ">=0.2.2",
+				"should": ">=0.0.4"
+    },
+    "licenses":[  {"type" : "MIT"} ],
+    "repository": {
+        "type":"git",
+        "url":"http://github.com/neyric/webhookit.git"
+    }
+}

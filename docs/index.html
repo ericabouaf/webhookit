@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="custom-modules.html">Custom Modules</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h1>Welcome</h1>
+<p>WebHookIt provides a visual programming paradigm to create simple webservices, mashups, web application integrations, composability between webservices, event-driven web programming, ... in short <em>program the web</em>.</p>
+
+<p>WebHookIt is an open-source project, released under <a href="http://neyric.github.com/webhookit/license.txt">MIT license</a>.</p>
+
+<p><img src="images/editor_small.png" /></p>
+
+<p>A <a href="http://webhookit.no.de">limited hosted demo</a> is hosted on Joyent</p>
+
+<h2 id="Features-Design-goals">Features / Design goals</h2>
+
+<ul>
+<li><a href="editor.html">Visual Editor</a></li>
+<li><a href="cron-jobs.html">cron-based execution</a></li>
+<li><a href="api.html">RESTful API</a>
+
+<ul>
+<li>execute it through a simple HTTP request</li>
+<li>call wirings through a web page with a form to enter the parameters</li>
+<li>public execution of wirings through HTTP calls</li>
+<li>easy integration</li>
+<li>execution from an email through <a href="tutorial-mailhooks.html">MailHooks</a></li>
+</ul>
+</li>
+<li>extensible
+
+<ul>
+<li><a href="custom-modules.html">add custom modules</a></li>
+<li>connect to any web service</li>
+</ul>
+</li>
+<li>Asynchronous</li>
+<li>Lightweight</li>
+<li><a href="stack.html">100% javascript</a></li>
+</ul>
+
+
+<h2 id="Use-cases">Use cases</h2>
+
+<ul>
+<li>dead simple webservices</li>
+<li>widgets for a website</li>
+<li>create Mashups</li>
+<li><a href="http://www.webhooks.org/">Webhooks</a> listeners
+
+<ul>
+<li><em>Notifications</em>  <em>I wish I could get notiﬁcations exactly how I want</em></li>
+<li><em>data synching</em> <em>I wish my web apps would keep overlapping data in sync</em></li>
+<li><em>chaining</em> <em>I wish I could make another app do something  when I use this app.</em></li>
+<li><em>modification</em> <em>I wish I could make this app work just slightly differently.</em></li>
+<li><em>plugins</em> <em>I wish I could let my users extend/build plugins for my app.</em></li>
+</ul>
+</li>
+</ul>
+
+
+<h3 id="How-we-are-different-from-Yahoo-Pipes-">How we are different from Yahoo! Pipes ?</h3>
+
+<p>First, we do not want to be a clone of <a href="http://pipes.yahoo.com/">Yahoo! Pipes</a>. Surely, the interface was the inspiration, but the scope of WebHookIt is much broader. The main reason of this project is to have deeper control over every part of the system.</p>
+
+<p>WebHookIt sits in middle of Yahoo! Pipes and services like <a href="http://www.scriptlets.org/">Scriptlets</a>, <a href="http://www.notify.io/">Notify.io</a>, or <a href="http://tarpipe.com">Tarpipe</a></p>
+
+<ul>
+<li>no run limitations</li>
+<li>control cache policies</li>
+<li>built-in cron system to call pipes on demand</li>
+<li>better RESTful integration</li>
+<li>customizable</li>
+<li>integrate with your private systems</li>
+<li>interacting with the web of objects</li>
+<li>run system commands</li>
+<li>code modules in ruby, python etc...</li>
+<li>access to filesystem</li>
+</ul>
+
+
+<p>Of course, we lose some features :</p>
+
+<ul>
+<li>Not a hosted service : but it is quite easy to install freely on <a href="install_joyent.html">Joyent</a></li>
+<li>Social aspect : We plan to provide a community packet manager to share wirings in the future</li>
+</ul>
+
+
+<h2 id="Help">Help</h2>
+
+<p>WebHookIt is still <em>alpha</em>. If you wish to support this project, you can Donate below.</p>
+
+<p>Donations will be used for development, maintenance and promotion of this project.</p>
+
+<p><a href="http://www.pledgie.com/campaigns/13031"><img src="http://www.pledgie.com/campaigns/13031.png?skin_name=chrome" border="0" alt="Click here to lend your support to: wireit and make a donation at www.pledgie.com !" /></a></p>
+
+</div>
+			</div>
+		</div>
+	</body>
+</html>
