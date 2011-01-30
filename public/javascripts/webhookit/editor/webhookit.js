@@ -38,25 +38,30 @@ var webhookit = {
 		var value = this.editor.getValue();
 		// TODO: save it first
 		
-		if(!value.name) {
+		// Get the id
+		var prev = this.editor.pipesByName[value.name];
+		
+		if(!prev || !prev.id) {
 			this.editor.alert("Open a wiring first.");
 			return;
 		}
 		
-		window.location = "/users/"+username+"/"+value.name+"/edit-template";
+		window.location = "/wirings/"+prev.id+"/edit-template";
 	},
    
    run: function() {
 		var value = this.editor.getValue();
 		// TODO: save it first
 		
+		// Get the id
+		var prev = this.editor.pipesByName[value.name];
 		
-		if(!value.name) {
+		if(!prev || !prev.id) {
 			this.editor.alert("Open a wiring first.");
 			return;
 		}
 		
-		window.location = "/users/"+username+"/"+value.name+"";
+		window.location = "/wirings/"+prev.id;
    },
 
 
