@@ -127,3 +127,5 @@ ec2-run-instances -t c1.medium -n 1 -g default -k default --user-data-file insta
   
 </pre>
 
+
+<script type="text/javascript">var disqus_shortname = 'aws_install';</script>

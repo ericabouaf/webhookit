@@ -64,3 +64,6 @@ If true, the third parameter enables debug mode. The returned results will be di
 
  * loops not implemented yet
   
+
+
+<script type="text/javascript">var disqus_shortname = 'simpleflow';</script>

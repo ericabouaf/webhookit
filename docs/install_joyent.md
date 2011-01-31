@@ -66,3 +66,6 @@ Deploy
 
     $ node-service-restart
     $ node-service-log
+
+
+<script type="text/javascript">var disqus_shortname = 'install-joyent';</script>

@@ -30,3 +30,6 @@ A wiring properly created contains input and output modules.
 The form is automatically created by aggregating the input modules fields into a single form.
 
 Output terminals are created according to output modules in your original wiring.
+
+
+<script type="text/javascript">var disqus_shortname = 'editor';</script>

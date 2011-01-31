@@ -9,7 +9,6 @@ DOCS = docs/index.md \
 		docs/install_joyent.md \
 		docs/cron-jobs.md \
 		docs/editor.md \
-		docs/quickstart.md \
 		docs/webhooks.md \
 		docs/redirect-url.md \
 		docs/simpleflow.md \

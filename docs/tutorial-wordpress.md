@@ -8,3 +8,7 @@ HookPress turns all of your WordPress-internal hooks into webhooks. Possible use
 ## Installation
 	
 Install a fresh Wordpress blog somewhere and add the <a href="http://wordpress.org/extend/plugins/hookpress/">HookPress plugin</a>.
+
+
+
+<script type="text/javascript">var disqus_shortname = 'tutorial-wordpress';</script>

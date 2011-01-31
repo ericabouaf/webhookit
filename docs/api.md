@@ -24,3 +24,5 @@ You can pre-set different parameters in this form :
 ## Template Rendering
 
 If you are using an EJS template
+
+<script type="text/javascript">var disqus_shortname = 'api';</script>

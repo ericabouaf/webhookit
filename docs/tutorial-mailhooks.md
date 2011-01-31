@@ -5,3 +5,7 @@
 
 
 <img src="images/tutorial-mailhooks.png"/>
+
+
+
+<script type="text/javascript">var disqus_shortname = 'mailhooks';</script>

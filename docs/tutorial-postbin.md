@@ -11,3 +11,7 @@ In the Editor, create a new wiring, add an HTTP module to the canvas, and config
 <img src="images/postbin.png" />
 
 Now hit the "Debug" button. Refresh your postbin page, and you should see the request !
+
+
+<script type="text/javascript">var disqus_shortname = 'postbin';</script>
+

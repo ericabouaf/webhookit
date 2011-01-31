@@ -253,3 +253,6 @@ The allowed values for the cron pattern fields are described in the following ta
 		</td>
 	</tr>
 </table>
+
+
+<script type="text/javascript">var disqus_shortname = 'cron-jobs';</script>

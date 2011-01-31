@@ -24,11 +24,7 @@
 				"mongodb": ">=0.7.9",
 				"cron": ">=0.1.0",
 				"ejs": ">=0.2.0",
-				"xml2js": ">=0.1.5",
-				"email": ">=0.2.2",
-				"should": ">=0.0.4",
-				"yql": ">=0.2.0",
-				"soupselect": ">=0.2.0"
+				"should": ">=0.0.4"
     },
     "licenses":[  {"type" : "MIT"} ],
     "repository": {

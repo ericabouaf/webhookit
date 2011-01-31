@@ -14,3 +14,7 @@ In the future, we plan to select among pre-formatted template (Google Maps, Exhi
  
 Ideal for Mashups !
  
+ 
+ 
+ 
+<script type="text/javascript">var disqus_shortname = 'templates';</script>

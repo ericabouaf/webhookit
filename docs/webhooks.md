@@ -29,3 +29,5 @@ To learn more about webhooks, take a look at the webhooks blog as well as The Pu
 	
  * <a href="http://blog.webhooks.org/">Webooks.org blog</a>
  * <a href="http://webhooks.pbworks.com/">wiki</a>
+
+<script type="text/javascript">var disqus_shortname = 'webhooks';</script>

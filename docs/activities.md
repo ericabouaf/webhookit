@@ -11,5 +11,4 @@ You can inspect:
   * response format
   
   
-  
-  
+<script type="text/javascript">var disqus_shortname = 'activities';</script>

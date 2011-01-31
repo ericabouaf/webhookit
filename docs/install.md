@@ -47,3 +47,6 @@ You should use an event-loop based HTTP server.
 
 You can optionally configure the web server to serve static files from the /public/ directory.
 
+
+<script type="text/javascript">var disqus_shortname = 'install';</script>
+

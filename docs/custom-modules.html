@@ -17,6 +17,7 @@
 	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
 	  <li><a href="public-run.html">Public Execution</a></li>
 	  <li><a href="templates.html">Rendering templates</a></li>
+	  <li><a href="custom-modules.html">Custom Modules</a></li>
   </ul></li>
 	<li>Example<ul>
 	    <li><a href="tutorial-prowl.html">Prowl</a></li>
@@ -32,7 +33,6 @@
 	<li>Developers Guide<ul>
 	  <li><a href="stack.html">Stack</a></li>
 	  <li><a href="simpleflow.html">Simpleflow</a></li>
-	  <li><a href="custom-modules.html">Custom Modules</a></li>
 	  <li><a href="contribute.html">Contribute</a></li>
 	</ul></li>
 	<li>Links<ul>
@@ -51,46 +51,170 @@
 		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
 		<div class='mp'>
 <h1>Creating custom modules</h1>
-<p>in lib/modules</p>
+<h2 id="Introduction">Introduction</h2>
 
-<pre><code>exports.run = function(params, cb) {
+<p>WebHookIt is made to be extended to your own needs. There are two kinds of modules in WebHookIt :</p>
 
-    console.log("My module !");
-    console.log(params);
+<ul>
+<li>Core Modules : simple asynchronous functions written in Node.js + module interface definitions</li>
+<li>wirings module : created via the visual editor, they uses core modules and can be composed</li>
+</ul>
 
-    // You can return anything
-    cb({out: ["ceci", 354, "une", "liste"]});
 
-};
+<p>This page only concerns Core Modules.</p>
 
-exports.definition = {
-  "name": "myModule",
-    "category": "Templating",
+<h2 id="NPM">NPM</h2>
+
+<p>WebHookIt core modules are distributed through the npm(http://npmjs.org/) package manager, which means you can contribute WebHookIt modules by publishing a package to the <a href="http://search.npmjs.org/">npm registry</a> called "webhookit-<i>mymodule</i>".</p>
+
+<p>Basic modules are available on this repository: <a href="https://github.com/neyric/webhookit-packages" data-bare-link="true">https://github.com/neyric/webhookit-packages</a></p>
+
+<p>The WebHookIt modules can be installed/updated/uninstalled from the /packages page. This page automatically lists all packages called "webhookit-mymodule" from the npm registry.</p>
+
+<h2 id="Development">Development</h2>
+
+<p>When creating a custom module, it is simpler to create a file in <em>lib/modules/</em> called <em>mymodule.js</em>, since you won't need to publish the package at each change.</p>
+
+<p>This can be used in "production" too but the advantage of using a NPM package is that you can define dependencies for your module. (for example, the webhookit-yql package depends on the yql package)</p>
+
+<h2 id="Custom-module-file">Custom module file</h2>
+
+<p>Custom modules must export two objects :</p>
+
+<ul>
+<li>definition: an object containing the UI definition of the module</li>
+<li>run: a method which actually execute your module</li>
+</ul>
+
+
+<p>Let's look at the YQL module. First, the definition of the module as it will appear in the editor :</p>
+
+<pre><code>exports.definition = {
+   "name": "yql",
+     "category": "Sources",
    "container": {
-        "icon": "/images/icons/script_edit.png",
-      "xtype": "WireIt.MyModuleContainer",
-        "title": "Liquid",
-        "fields": [
-            {"type": "text", "name": "template", "wirable": false }
-        ],
-        "terminals": [
-            {"name": "in", "direction": [0,-1], "offsetPosition": [82,-15], "ddConfig": {
-             "type": "input",
-             "allowedTypes": ["output"]
-          },
-          "nMaxWires": 1
-         },
-           {"name": "out", "direction": [0,1], "offsetPosition": {"left": 86, "bottom": -15}, "ddConfig": {
-             "type": "output",
-             "allowedTypes": ["input"]
-          }
+          "icon": "/images/module_icons/yql.png",
+      "xtype": "WireIt.TextareaContainer",
+          "title": "yql",
+          "fields": [
+               {"type": "text", "name": "query", "wirable": true }
+          ],
+          "terminals": [
+              {
+                "name": "out", 
+                "direction": [0,1], 
+                "offsetPosition": {"left": 86, "bottom": -15}, 
+                "ddConfig": { "type": "output", "allowedTypes": ["input"] }
          }
        ]
    }
 };
 </code></pre>
 
+<p>Then, the run method which will actually execute what you want. This method takes two parameters, the parameters hash, and the callback to call when you're done :</p>
+
+<pre><code>var YQL = require('yql');
+
+exports.run = function(params, cb) {
+
+    new YQL.exec(params.query, function(response) {
+
+        cb({"out": response});
+
+    }, {}, {"https": true});
+
+};
+</code></pre>
+
+<h2 id="Creating-a-package">Creating a package</h2>
+
+<p>Create a directory structure like this one :</p>
+
+<ul>
+<li>mymodule/
+
+<ul>
+<li>package.json</li>
+<li>lib/
+
+<ul>
+<li>webhookit-mymodule/
+
+<ul>
+<li>index.js</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The index.js file must contain</p>
+
+<p>Then, configure the package.json file :</p>
+
+<pre><code>{
+    "name": "webhookit-yql",
+    "version": "0.0.1",
+    "description": "YQL module for WebHookIt",
+    "author": "Eric Abouaf &lt;eric.abouaf@gmail.com&gt;",
+    "bugs": { "web" : "http://github.com/neyric/webhookit-packages/issues" },
+    "os": ["darwin", "linux"],
+    "contributors": [
+        "Eric Abouaf &lt;eric.abouaf@gmail.com&gt; (http://neyric.com)"
+    ],
+    "engines": {
+        "node" : "&gt;=0.2.5"
+    },
+    "directories": {
+        "lib" : "./lib"
+    },
+    "main": "./lib/webhookit-yql",
+    "dependencies": {
+        "yql": "&gt;=0.2.0"
+    },
+    "licenses":[  {"type" : "MIT"} ],
+    "repository": {
+        "type":"git",
+        "url":"http://github.com/neyric/webhookit-packages.git"
+    }
+}
+</code></pre>
+
+<p>Finally, publish your package on the npm registry :</p>
+
+<pre><code>cd mymodule/
+npm publish .
+</code></pre>
+
+<p>Then go to the /packages page on your WebHookIt installation, and click the Install Package button !</p>
+
+<script type="text/javascript">var disqus_shortname = 'custom-modules';</script>
+
+
+
+
 </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sdfsdf';
+
+  if(window.disqus_shortname) {
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    // var disqus_identifier = 'unique_dynamic_id_1234';
+    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  }
+</script>
+
 			</div>
 		</div>
 	</body>
