@@ -12,12 +12,11 @@
 	<li><a href="index.html">Home</a></li>
 	<li>User Guide<ul>
 	  <li><a href="editor.html">Editor</a></li>
-	  <li><a href="api.html">API</a></li>
+	  <li><a href="api.html">HTTP API</a></li>
 	  <li><a href="activities.html">Activities</a></li>
 	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
 	  <li><a href="public-run.html">Public Execution</a></li>
 	  <li><a href="templates.html">Rendering templates</a></li>
-	  <li><a href="custom-modules.html">Custom Modules</a></li>
   </ul></li>
 	<li>Example<ul>
 	    <li><a href="tutorial-prowl.html">Prowl</a></li>
@@ -27,8 +26,15 @@
 	</ul></li>
 	<li>Install <ul>
 	  <li><a href="install.html">Install</a></li>
+	  <li><a href="configuration.html">Configuration</a></li>
 	  <li><a href="install_joyent.html">Joyent</a></li>
 	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Custom Modules<ul>
+    <li><a href="custom-modules.html">Introduction</a></li>
+    <li><a href="custom-modules-ui.html">User Interface</a></li>
+    <li><a href="custom-modules-js.html">Javascript code</a></li>
+    <li><a href="custom-modules-packages.html">Packages</a></li>
 	</ul></li>
 	<li>Developers Guide<ul>
 	  <li><a href="stack.html">Stack</a></li>
@@ -38,6 +44,7 @@
 	<li>Links<ul>
 	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
 	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://groups.google.com/groups/webhookit/">Forum</a></li>
 	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
 	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
 	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
@@ -50,13 +57,43 @@
 		<span>v0.0.1a - developer preview</span>
 		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
 		<div class='mp'>
-<h1>Contribute</h1>
+<h1>Contribution guidelines</h1>
+<h2 id="Do">Do</h2>
+
 <ul>
-<li>Fork the project on GitHub</li>
-<li>Make your feature addition or bug fix</li>
-<li>Send me a pull request. Bonus points for topic branches.</li>
-<li>Front-end : Commit in the right project, WireIt or inputEx</li>
-<li>Create <a href="custom-modules.html">custom modules</a></li>
+<li>Use <strong>git</strong>. Fork the project on <a href="http://github.com/neyric/webhookit">GitHub</a> and send pull requests.</li>
+<li>Commit WireIt or inputEx patches in their own repositories</li>
+<li>Create <a href="custom-modules.html">custom modules</a>
+
+<ul>
+<li>and deploy them using <a href="custom-modules-packages.html">NPM packages</a></li>
+<li>or fork the <a href="http://github.com/neyric/webhookit-packages">webhookit-packages</a> repository</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="Don-t">Don't</h2>
+
+<ul>
+<li>Don't commit WireIt or inputEx changes in the WebHookIt repository !</li>
+<li>Don't commit custom modules in the lib/modules directory !</li>
+<li>Don't send me personal emails for bugs or issues. Use the <a href="http://groups.google.com/groups/webhookit/">forum</a></li>
+</ul>
+
+
+<h2 id="Help">Help</h2>
+
+<p>Here is a list of competances the WebHookIt team still is missing:</p>
+
+<ul>
+<li>design
+
+<ul>
+<li>logo ?</li>
+<li>website design</li>
+</ul>
+</li>
 </ul>
 
 

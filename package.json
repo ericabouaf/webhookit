@@ -24,7 +24,15 @@
 				"mongodb": ">=0.7.9",
 				"cron": ">=0.1.0",
 				"ejs": ">=0.2.0",
-				"should": ">=0.0.4"
+				"should": ">=0.0.4",
+				"webhookit-comment": "0.0.1",
+				"webhookit-ejs": "0.0.1",
+				"webhookit-email": "0.0.1",
+				"webhookit-http": "0.0.1",
+				"webhookit-jsonpath": "0.0.1",
+				"webhookit-objectbuilder": "0.0.1",
+				"webhookit-soupselect": "0.0.1",
+				"webhookit-yql": "0.0.1"
     },
     "licenses":[  {"type" : "MIT"} ],
     "repository": {

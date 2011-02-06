@@ -7,6 +7,7 @@ DOCS = docs/index.md \
 		docs/tutorial-prowl.md \
 		docs/aws_install.md \
 		docs/install_joyent.md \
+		docs/configuration.md \
 		docs/cron-jobs.md \
 		docs/editor.md \
 		docs/webhooks.md \
@@ -16,6 +17,9 @@ DOCS = docs/index.md \
 		docs/tutorial-postbin.md \
 		docs/tutorial-mailhooks.md \
 		docs/custom-modules.md \
+		docs/custom-modules-ui.md \
+		docs/custom-modules-js.md \
+		docs/custom-modules-packages.md \
 		docs/contribute.md \
 		docs/activities.md \
 		docs/public-run.md \

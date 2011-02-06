@@ -1,5 +1,5 @@
 
-# API
+# HTTP API
 	
 ## URL pattern
 

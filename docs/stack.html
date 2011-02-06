@@ -12,12 +12,11 @@
 	<li><a href="index.html">Home</a></li>
 	<li>User Guide<ul>
 	  <li><a href="editor.html">Editor</a></li>
-	  <li><a href="api.html">API</a></li>
+	  <li><a href="api.html">HTTP API</a></li>
 	  <li><a href="activities.html">Activities</a></li>
 	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
 	  <li><a href="public-run.html">Public Execution</a></li>
 	  <li><a href="templates.html">Rendering templates</a></li>
-	  <li><a href="custom-modules.html">Custom Modules</a></li>
   </ul></li>
 	<li>Example<ul>
 	    <li><a href="tutorial-prowl.html">Prowl</a></li>
@@ -27,8 +26,15 @@
 	</ul></li>
 	<li>Install <ul>
 	  <li><a href="install.html">Install</a></li>
+	  <li><a href="configuration.html">Configuration</a></li>
 	  <li><a href="install_joyent.html">Joyent</a></li>
 	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Custom Modules<ul>
+    <li><a href="custom-modules.html">Introduction</a></li>
+    <li><a href="custom-modules-ui.html">User Interface</a></li>
+    <li><a href="custom-modules-js.html">Javascript code</a></li>
+    <li><a href="custom-modules-packages.html">Packages</a></li>
 	</ul></li>
 	<li>Developers Guide<ul>
 	  <li><a href="stack.html">Stack</a></li>
@@ -38,6 +44,7 @@
 	<li>Links<ul>
 	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
 	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://groups.google.com/groups/webhookit/">Forum</a></li>
 	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
 	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
 	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
@@ -55,46 +62,34 @@
 
 <p> The front-end editor is based on the following javascript libraries :</p>
 
+<p><img src="images/wireit.png" height="99" style="float: right" width="135" /></p>
+
 <ul>
-<li>WireIt (WiringEditor, Wires, and other widgets. based on the YUI library)</li>
-<li>inputEx (forms, fields, widgets based on the YUI library)</li>
-<li>YUI 2.x branch (for general javascript)</li>
+<li><a href="http://neyric.github.com/wireit">WireIt</a> (WiringEditor, Wires, and other widgets. based on the YUI library)</li>
+<li><a href="http://neyric.github.com/inputex">inputEx</a> (forms, fields, widgets based on the YUI library)</li>
+<li><a href="developer.yahoo.com/yui/2/">YUI</a> 2.x branch (for general javascript)</li>
 </ul>
 
 
-<p>   <img src="images/wireit.png" height="99" width="135" /></p>
+<h2 id="Backend-Server-side">Backend / Server-side</h2>
 
-<h2 id="Backend">Backend</h2>
-
-<h3 id="Node-js">Node.js</h3>
-
-<p><img src="images/nodejs.jpg" /></p>
-
-<p>npm</p>
-
-<h3 id="MongoDB">MongoDB</h3>
-
-<p><img src="images/mongodb.png" /></p>
+<p><img src="images/nodejs.jpg" style="float: right; clear: right;" />
+<img src="images/mongodb.png" style="float: right; clear: right;" /></p>
 
 <ul>
-<li> Node.js</li>
-<li> MongoDB</li>
+<li><a href="http://nodejs.org/">Node.js</a> : asynchronous server-side javascript</li>
+<li><a href="http://www.mongodb.org/">MongoDB</a> : document-oriented databases</li>
 </ul>
 
 
-<h3 id="Express-JS">Express JS</h3>
+<p>We're also using a bunch of helpful Node.js librairies :</p>
 
 <ul>
-<li>server.js</li>
-</ul>
-
-
-<h3 id="Other-librairies">Other librairies</h3>
-
-<ul>
-<li>Mongo-native</li>
-<li>cron</li>
-<li>EJS</li>
+<li><a href="http://npmjs.org">npm</a>: Package Manager for Node.js, also used for the WebHookIt package system</li>
+<li><a href="http://expressjs.com">ExpressJS</a>: RESTful website framework</li>
+<li><a href="http://github.com/mongodb/mongo-ruby-driver/">Mongo-native</a>: MongoDB driver</li>
+<li><a href="http://github.com/ncb000gt/node-cron">cron</a>: cron using setTimeout</li>
+<li><a href="http://embeddedjs.com">EJS</a>: Embedded Javascript Templating system</li>
 </ul>
 
 

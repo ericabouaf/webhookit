@@ -54,11 +54,11 @@ ul li ul { margin: 0; padding-left: 12px; }
 
 
 #menu {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  margin: 0 0 0 15px;
-  padding: 15px;
+  padding: 15px 15px 15px 30px;
   font-size: 90%;
+  background-color: white;
 }
 #menu li { padding: 0; list-style: none; }
