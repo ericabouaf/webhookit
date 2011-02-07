@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">HTTP API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="configuration.html">Configuration</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Custom Modules<ul>
+    <li><a href="custom-modules.html">Introduction</a></li>
+    <li><a href="custom-modules-ui.html">User Interface</a></li>
+    <li><a href="custom-modules-js.html">Javascript code</a></li>
+    <li><a href="custom-modules-packages.html">Packages</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://groups.google.com/groups/webhookit/">Forum</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h1>Configuration</h1>
+<p>WebHookIt configuration happens in the config/ subfolder. This folder contains one file per environment. At startup, WebHookIt will load the file <em>config/(:EXPRESS_ENV).js</em> file according to the EXPRESS_ENV environment variable.</p>
+
+<p>The default environment is <strong>development</strong>. To launch the server with the <strong>production</strong> environment :</p>
+
+<pre><code>$ EXPRESS_ENV=production node server.js
+</code></pre>
+
+<p><strong>Important</strong>: Any change in the config file will require to <em>restart the server</em> !</p>
+
+<p>The configuration file includes :</p>
+
+<ul>
+<li>mongoDB access parameters</li>
+<li>server port &amp; IP</li>
+<li>sessions key &amp; secret</li>
+<li>Feature control (enabling/disabling features)
+
+<ul>
+<li>cron</li>
+<li>users</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Here is the default development.js content :</p>
+
+<pre><code>module.exports = {
+
+    // mongoDB access
+    database: {
+        host: 'localhost',
+        port: 27017,
+        db: 'testmongo',
+        options: {
+            auto_reconnect: true
+        }
+    },
+
+    // Bind port/IP
+    server: {
+        port: 8124
+    },
+
+
+    sessions: {
+        key: 'some-key',
+        secret: 'some-We1rD sEEEEEcret!'
+    },
+
+    // Features
+    cron: {
+        enabled: true
+    },
+
+    users: {
+        creation: {
+            // Is the creation of new users public ?
+            "public": true
+        }
+    }
+
+};
+</code></pre>
+
+</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sdfsdf';
+
+  if(window.disqus_shortname) {
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    // var disqus_identifier = 'unique_dynamic_id_1234';
+    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  }
+</script>
+
+			</div>
+		</div>
+	</body>
+</html>

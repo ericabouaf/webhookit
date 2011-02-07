@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">HTTP API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="configuration.html">Configuration</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Custom Modules<ul>
+    <li><a href="custom-modules.html">Introduction</a></li>
+    <li><a href="custom-modules-ui.html">User Interface</a></li>
+    <li><a href="custom-modules-js.html">Javascript code</a></li>
+    <li><a href="custom-modules-packages.html">Packages</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://groups.google.com/groups/webhookit/">Forum</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h1>Custom modules User Interface</h1>
+<p>Most of the UI elements in the WebHookIt Editor are provided by the <a href="http://neyric.github.com/wireit">WireIt</a> javascript library. In particular, WireIt "boxes" are called <strong>Containers</strong>.</p>
+
+<p>When designing a WebHookIt module, you will have to define which Container to use, as well as some configuration about it. You can either :</p>
+
+<ul>
+<li>leverage existing Containers (recommanded)</li>
+<li>create a Custom container (advanced usage)</li>
+</ul>
+
+
+<p>The easiest way to get started, is to use an existing Container. WireIt pre-defines some kind of containers :</p>
+
+<ul>
+<li><strong>FormContainer</strong>: displays a form inside the box</li>
+<li><strong>InOutContainer</strong>: named inputs/outputs</li>
+<li><strong>ImageContainer</strong>: simple image container</li>
+<li><strong>TextareaContainer</strong>: simple text zone</li>
+</ul>
+
+
+<p>When generating a module from a previously created wiring, WebHookIt is using the <em>ComposedContainer</em>, which inherits the <em>FormContainer</em>. <em>ComposedContainer</em> generates the form from the different <em>input</em> modules present in your wiring.</p>
+
+<p>Creating a custom WireIt Container can be hard, depending on what you want to do. You'll need good experience and knowledge in Javascript, the YUI Library, and the WireIt framework. The WireIt documentation has a section about <a href="http://localhost:8888/Projets/WireIt/guide.html#containers">creating custom containers</a>.</p>
+
+<h2 id="exports-definition">exports.definition</h2>
+
+<h3 id="General-form">General form</h3>
+
+<p>The WireIt definition of the container representing the module is a JSON structure, which looks like so :</p>
+
+<pre><code>exports.definition = {
+   "name": "yql",
+   "category": "Sources",
+   "container": {
+      "xtype": "WireIt.TextareaContainer",
+      "icon": "/images/module_icons/yql.png",
+      "title": "yql"
+   }
+};
+</code></pre>
+
+<ul>
+<li>name :</li>
+<li>category</li>
+<li>container</li>
+<li>xtype</li>
+<li>icon</li>
+<li>title</li>
+</ul>
+
+
+<p><strong>Important</strong>: Depending of the container <em>xtype</em>, the <em>container</em> object can take additional properties.</p>
+
+<h3 id="Configuring-Terminals">Configuring Terminals</h3>
+
+<p>All WireIt Containers must inherit the base class <em>WireIt.Container</em>.</p>
+
+<p>This class specifies the <em>terminals</em> properties, which is an array of Terminal configurations.</p>
+
+<h3 id="YQL-example">YQL example</h3>
+
+<p>Let's look at the YQL module. First, the definition of the module as it will appear in the editor :</p>
+
+<pre><code>exports.definition = {
+   "name": "yql",
+     "category": "Sources",
+   "container": {
+          "icon": "/images/module_icons/yql.png",
+      "xtype": "WireIt.TextareaContainer",
+          "title": "yql",
+          "fields": [
+               {"type": "text", "name": "query", "wirable": true }
+          ],
+          "terminals": [
+              {
+                "name": "out", 
+                "direction": [0,1], 
+                "offsetPosition": {"left": 86, "bottom": -15}, 
+                "ddConfig": { "type": "output", "allowedTypes": ["input"] }
+         }
+       ]
+   }
+};
+</code></pre>
+
+<h2 id="Styling-with-CSS">Styling with CSS</h2>
+
+<p>WireIt assigns two CSS classes to containers :</p>
+
+<ul>
+<li>the name of the container's xtype</li>
+<li>the name of the container</li>
+</ul>
+
+
+<p>The YQL module will have the following classes set: <em>WireIt-TextareaContainer</em> and <em>WiringEditor-module-YQL</em></p>
+
+<script type="text/javascript">var disqus_shortname = 'custom-modules-ui';</script>
+
+
+
+
+</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sdfsdf';
+
+  if(window.disqus_shortname) {
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    // var disqus_identifier = 'unique_dynamic_id_1234';
+    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  }
+</script>
+
+			</div>
+		</div>
+	</body>
+</html>

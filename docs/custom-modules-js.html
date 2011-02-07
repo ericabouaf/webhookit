@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">HTTP API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="configuration.html">Configuration</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Custom Modules<ul>
+    <li><a href="custom-modules.html">Introduction</a></li>
+    <li><a href="custom-modules-ui.html">User Interface</a></li>
+    <li><a href="custom-modules-js.html">Javascript code</a></li>
+    <li><a href="custom-modules-packages.html">Packages</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://groups.google.com/groups/webhookit/">Forum</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h1>Executing custom modules</h1>
+<p>Custom modules uses Node.js. You can do anything you want !</p>
+
+<h2 id="General-form">General form</h2>
+
+<p>You custom module MUST export a <em>run</em> function. This method takes two parameters :</p>
+
+<ul>
+<li><em>params</em> : an associated array (hash) containing the parameters.</li>
+<li><p><em>cb</em> : the callback method, to call when your module is done.</p>
+
+<p> exports.run = function(params, cb) {</p>
+
+<pre><code>cb({"out": response});
+</code></pre>
+
+<p> };</p></li>
+</ul>
+
+
+<p><strong>The callback methods must be called with a results object parameters. Each key of the object must be related to a terminal with the same name.</strong></p>
+
+<h2 id="Understanding-the-params">Understanding the params</h2>
+
+<h2 id="Example-using-YQL">Example using YQL</h2>
+
+<p>The YQL module is a typical scenario, where a Node.js library already exists for the webservice. The run method becomes a really dumb wrapper around the library call :</p>
+
+<pre><code>var YQL = require('yql');
+
+exports.run = function(params, cb) {
+
+    new YQL.exec(params.query, function(response) {
+
+        cb({"out": response});
+
+    }, {}, {"https": true});
+
+};
+</code></pre>
+
+</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sdfsdf';
+
+  if(window.disqus_shortname) {
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    // var disqus_identifier = 'unique_dynamic_id_1234';
+    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  }
+</script>
+
+			</div>
+		</div>
+	</body>
+</html>

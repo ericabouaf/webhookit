@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webhookit - Pipes for Hackers</title>
+<link href="style.css" type="text/css" rel="stylesheet" /> </head>
+<body>
+<a href='http://github.com/neyric/webhookit'> 
+  <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' /> 
+</a>
+
+<ul id="menu">
+	<li><a href="index.html">Home</a></li>
+	<li>User Guide<ul>
+	  <li><a href="editor.html">Editor</a></li>
+	  <li><a href="api.html">HTTP API</a></li>
+	  <li><a href="activities.html">Activities</a></li>
+	  <li><a href="cron-jobs.html">Cron Jobs</a></li>
+	  <li><a href="public-run.html">Public Execution</a></li>
+	  <li><a href="templates.html">Rendering templates</a></li>
+  </ul></li>
+	<li>Example<ul>
+	    <li><a href="tutorial-prowl.html">Prowl</a></li>
+	    <li><a href="tutorial-postbin.html">Postbin</a></li>
+	    <li><a href="tutorial-mailhooks.html">MailHooks</a></li>
+	    <li><a href="tutorial-wordpress.html">Wordpress</a></li>
+	</ul></li>
+	<li>Install <ul>
+	  <li><a href="install.html">Install</a></li>
+	  <li><a href="configuration.html">Configuration</a></li>
+	  <li><a href="install_joyent.html">Joyent</a></li>
+	  <li><a href="aws_install.html">Amazon EC2</a></li>
+	</ul></li>
+	<li>Custom Modules<ul>
+    <li><a href="custom-modules.html">Introduction</a></li>
+    <li><a href="custom-modules-ui.html">User Interface</a></li>
+    <li><a href="custom-modules-js.html">Javascript code</a></li>
+    <li><a href="custom-modules-packages.html">Packages</a></li>
+	</ul></li>
+	<li>Developers Guide<ul>
+	  <li><a href="stack.html">Stack</a></li>
+	  <li><a href="simpleflow.html">Simpleflow</a></li>
+	  <li><a href="contribute.html">Contribute</a></li>
+	</ul></li>
+	<li>Links<ul>
+	    <li><a href="http://github.com/neyric/webhookit">source</a></li>
+	    <li><a href="http://neyric.com/category/projects/webhookit/">Blog</a></li>
+	    <li><a href="http://groups.google.com/groups/webhookit/">Forum</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/issues">Issues</a></li>
+	    <li><a href="http://github.com/neyric/webhookit/wiki">Wiki</a></li>
+	    <li><a href="http://webhookit.no.de">Online Demo</a></li>
+	</ul></li>
+</ul>
+
+<div id="wrapper">
+	<div id="container">
+		<span id='logo'>WebHookIt Documentation</span>
+		<span>v0.0.1a - developer preview</span>
+		<p id="tagline">Visual scripting for the web, Pipes for hackers, using <a href="http://nodejs.org">Node.js</a>, and <a href="http://www.mongodb.org">mongoDB</a></p>
+		<div class='mp'>
+<h1>Custom modules packages</h1>
+<h2 id="NPM">NPM</h2>
+
+<p>WebHookIt core modules are distributed through the npm(http://npmjs.org/) package manager, which means you can contribute WebHookIt modules by publishing a package to the <a href="http://search.npmjs.org/">npm registry</a> called "webhookit-<i>mymodule</i>".</p>
+
+<p>Basic modules are available on this repository: <a href="https://github.com/neyric/webhookit-packages" data-bare-link="true">https://github.com/neyric/webhookit-packages</a></p>
+
+<p>The WebHookIt modules can be installed/updated/uninstalled from the /packages page. This page automatically lists all packages called "webhookit-mymodule" from the npm registry.</p>
+
+<h2 id="Creating-a-package">Creating a package</h2>
+
+<p>Create a directory structure like this one :</p>
+
+<ul>
+<li>mymodule/
+
+<ul>
+<li>package.json</li>
+<li>lib/
+
+<ul>
+<li>webhookit-mymodule/
+
+<ul>
+<li>index.js</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The index.js file must contain</p>
+
+<p>Then, configure the package.json file :</p>
+
+<pre><code>{
+    "name": "webhookit-yql",
+    "version": "0.0.1",
+    "description": "YQL module for WebHookIt",
+    "author": "Eric Abouaf &lt;eric.abouaf@gmail.com&gt;",
+    "bugs": { "web" : "http://github.com/neyric/webhookit-packages/issues" },
+    "os": ["darwin", "linux"],
+    "contributors": [
+        "Eric Abouaf &lt;eric.abouaf@gmail.com&gt; (http://neyric.com)"
+    ],
+    "engines": {
+        "node" : "&gt;=0.2.5"
+    },
+    "directories": {
+        "lib" : "./lib"
+    },
+    "main": "./lib/webhookit-yql",
+    "dependencies": {
+        "yql": "&gt;=0.2.0"
+    },
+    "licenses":[  {"type" : "MIT"} ],
+    "repository": {
+        "type":"git",
+        "url":"http://github.com/neyric/webhookit-packages.git"
+    }
+}
+</code></pre>
+
+<p>Finally, publish your package on the npm registry :</p>
+
+<pre><code>cd mymodule/
+npm publish .
+</code></pre>
+
+<p>Then go to the /packages page on your WebHookIt installation, and click the Install Package button !</p>
+
+<script type="text/javascript">var disqus_shortname = 'custom-modules-packages';</script>
+
+
+
+
+</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sdfsdf';
+
+  if(window.disqus_shortname) {
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    // var disqus_identifier = 'unique_dynamic_id_1234';
+    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  }
+</script>
+
+			</div>
+		</div>
+	</body>
+</html>
