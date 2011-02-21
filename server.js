@@ -110,7 +110,7 @@ app.db.open(function() {
 	app.listen(app.config.server.port, app.config.server.ip);
 	
 	console.log("App started in '"+app.set('env')+"' environment !\n" +
-					"Listening on http://"+app.config.server.ip+":"+app.config.server.port);
+					"Listening on http://"+app.config.server.host+":"+app.config.server.port);
 
 	// Intercept exceptions after init so that the server doesn't crash at each uncatched exception
 	process.on('uncaughtException', function (err) {

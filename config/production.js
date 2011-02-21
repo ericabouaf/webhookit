@@ -13,7 +13,7 @@ module.exports = {
 	// Bind port/IP
 	server: {
 		port: 80,
-		ip: "64.30.137.184"
+		host: "64.30.137.184"
 	},
 	
 
