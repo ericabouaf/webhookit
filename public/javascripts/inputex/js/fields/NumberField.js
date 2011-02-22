@@ -28,19 +28,26 @@ YAHOO.lang.extend(inputEx.NumberField, inputEx.StringField, {
     * @return {Number} The parsed float
     */
    getValue: function() {
+	
+      var str_value;
+      
+      // StringField getValue (handles typeInvite and trim options)
+      str_value = inputEx.NumberField.superclass.getValue.call(this);
+      
       // don't return NaN if empty field
-      if ((this.options.typeInvite && this.el.value == this.options.typeInvite) || this.el.value == '') {
+      if (str_value === '') {
          return '';
       }
       
-      return parseFloat(this.el.value);
+      return parseFloat(str_value);
    },
    
    /**
     * Check if the entered number is a float
     */
    validate: function() { 
-      var v = this.getValue();
+      
+      var v = this.getValue(), str_value = inputEx.NumberField.superclass.getValue.call(this);
       
       // empty field
       if (v === '') {
@@ -48,10 +55,13 @@ YAHOO.lang.extend(inputEx.NumberField, inputEx.StringField, {
          return !this.options.required;
       }
       
-      if(isNaN(v)) return false;
-	   
-	   // We have to check the number with a regexp, otherwise "0.03a" is parsed to a valid number 0.03
-	   return !!this.el.value.match(/^([\+\-]?((([0-9]+(\.)?)|([0-9]*\.[0-9]+))([eE][+-]?[0-9]+)?))$/) && v >= this.options.min && v <= this.options.max;
+      if (isNaN(v)) {
+         return false;
+      }
+      
+      // We have to check the number with a regexp, otherwise "0.03a" is parsed to a valid number 0.03
+      return !!str_value.match(/^([\+\-]?((([0-9]+(\.)?)|([0-9]*\.[0-9]+))([eE][+-]?[0-9]+)?))$/) && v >= this.options.min && v <= this.options.max;
+      
    }
 
 });

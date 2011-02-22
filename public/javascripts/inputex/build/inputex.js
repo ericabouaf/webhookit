@@ -2,7 +2,7 @@
 Distributed under the MIT License :
 Visit http://neyric.github.com/inputex for more informations
 
-Copyright (c) 2007-2010, Eric Abouaf <eric.abouaf at gmail.com>
+Copyright (c) 2007-2011, Eric Abouaf <eric.abouaf at gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -83,7 +83,7 @@ inputEx = function(fieldOptions, parentField) {
 
 lang.augmentObject(inputEx, {
    
-   VERSION: "0.5.0",
+   VERSION: "0.7.1",
    
    /**
     * Url to the spacer image. This url schould be changed according to your project directories
@@ -182,7 +182,7 @@ lang.augmentObject(inputEx, {
       var opts = [];
       if(lang.isArray(groupOptions)) { opts = groupOptions; }
       if(fieldClass.superclass && !dontInherit && lang.isArray(fieldClass.superclass.constructor.groupOptions) ) {
-         opts = opts.concat(fieldClass.superclass.constructor.groupOptions);
+         opts = fieldClass.superclass.constructor.groupOptions.concat(opts);
       }
       fieldClass.groupOptions = opts;
    },
@@ -281,7 +281,7 @@ lang.augmentObject(inputEx, {
     * @return {HTMLElement} The created node
     */
    cn: function(tag, domAttributes, styleAttributes, innerHTML) {
-        if (tag == 'input' && YAHOO.env.ua.ie) { //only limit to input tag that has no tag body
+        if (tag == 'input' && YAHOO.env.ua.ie && YAHOO.env.ua.ie < 9) { //only limit to input tag that has no tag body
             var strDom = '<' + tag;
             if (domAttributes!=='undefined'){
                 for (var k in domAttributes){
@@ -357,6 +357,16 @@ lang.augmentObject(inputEx, {
 					  replace(/[ç]/g,"c").
 					  replace(/[œ]/g,"oe").
 					  replace(/[æ]/g,"ae");
+	},
+	
+	/**
+	 * String replaced by some html entities
+	 * @static
+	 * @param {String} str The string
+	 * @return {String} String replaced by some html entities
+	 */
+	htmlEntities: function (str) {
+	   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 	}
    
 });
@@ -803,13 +813,18 @@ inputEx.JsonSchema.Builder.prototype = {
 	                fieldDef.choices[i] = { label: o.label, value: o.value };
 	             }
              }
-             else {
+             else { // p.choices
 	             fieldDef.choices = [];
 	             for(var i = 0 ; i < p["enum"].length ; i++) {
 	                var o = p["enum"][i];
-	                fieldDef.choices[i] = { label: o.label, value: o.value };
+						 if(YAHOO.lang.isObject(o)) {
+	                	fieldDef.choices[i] = { label: o.label, value: o.value };
+						 }
+						 else {
+							fieldDef.choices[i] = { value: o };
+						 }
 	             }
-             }
+             }		
 	       }
 	       else if(type == "string") {
 	    	  if(!lang.isUndefined(p.pattern) && lang.isUndefined(fieldDef.regexp)) {
@@ -995,7 +1010,7 @@ inputEx.JsonSchema.Builder.prototype = {
 		 * Hide a choice
 		 * @param {Object} config An object targeting the choice to hide (e.g. { position : 1 } || { value: 'second' } || { label: 'Second' })
 		 */
-		hideChoice: function (config) {
+		hideChoice: function (config, sendUpdatedEvt) {
 			
 			var position, choice;
 			
@@ -1012,7 +1027,7 @@ inputEx.JsonSchema.Builder.prototype = {
 					
 					// Clear if hiding selected choice
 					if (this.getValue() === choice.value) {
-						this.clear();
+						this.clear(sendUpdatedEvt);
 					}
 					
 					// Remove from DOM
@@ -1240,10 +1255,9 @@ inputEx.Field.prototype = {
 	   }
 	   
 	   // Label element
-	   if(this.options.label) {
+	   if (YAHOO.lang.isString(this.options.label)) {
 	      this.labelDiv = inputEx.cn('div', {id: this.divEl.id+'-label', className: 'inputEx-label', 'for': this.divEl.id+'-field'});
-	      this.labelEl = inputEx.cn('label');
-	      this.labelEl.appendChild( document.createTextNode(this.options.label) );
+	      this.labelEl = inputEx.cn('label', null, null, this.options.label === "" ? "&nbsp;" : this.options.label);
 	      this.labelDiv.appendChild(this.labelEl);
 	      this.divEl.appendChild(this.labelDiv);
       }
@@ -1530,8 +1544,8 @@ inputEx.Field.prototype = {
 };
 
 inputEx.Field.groupOptions = [
+	{ type: "string", label: "Name", name: "name", value: '', required: true },
    { type: "string", label: "Label", name: "label", value: '' },
-   { type: "string", label: "Name", name: "name", value: '' },
    { type: "string", label: "Description",name: "description", value: '' },
    { type: "boolean", label: "Required?",name: "required", value: false },
    { type: "boolean", label: "Show messages",name: "showMsg", value: false }
@@ -1637,16 +1651,15 @@ lang.extend(inputEx.Group, inputEx.Field, {
   	   
       // Iterate this.createInput on input fields
       for (var i = 0 ; i < this.options.fields.length ; i++) {
-         var input = this.options.fields[i];
+         var fieldOptions = this.options.fields[i];
         
 			// Throw Error if input is undefined
-			if(!input) {
+			if(!fieldOptions) {
 				throw new Error("inputEx.Form: One of the provided fields is undefined ! (check trailing comma)");
 			}
 			
          // Render the field
-         var field = this.renderField(input);
-         this.fieldset.appendChild(field.getEl() );
+			this.addField(fieldOptions);
   	   }
   	
   	   // Collapsed at creation ?
@@ -1657,7 +1670,16 @@ lang.extend(inputEx.Group, inputEx.Field, {
   	   // Append the fieldset
   	   parentEl.appendChild(this.fieldset);
    },
-  
+
+	/**
+	 * Render a field and add it to the field set
+    * @param {Object} fieldOptions The field properties as required by the inputEx() method
+	 */
+   addField: function(fieldOptions) {
+		var field = this.renderField(fieldOptions);
+      this.fieldset.appendChild(field.getEl() );
+	},
+
    /**
     * Instanciate one field given its parameters, type or fieldClass
     * @param {Object} fieldOptions The field properties as required by the inputEx() method
@@ -2644,10 +2666,9 @@ lang.extend( inputEx.CombineField, inputEx.Group, {
    	}
 
 	   // Label element
-	   if(this.options.label) {
+	   if (YAHOO.lang.isString(this.options.label)) {
 	      this.labelDiv = inputEx.cn('div', {id: this.divEl.id+'-label', className: 'inputEx-label', 'for': this.divEl.id+'-field'});
-	      this.labelEl = inputEx.cn('label');
-	      this.labelEl.appendChild( document.createTextNode(this.options.label) );
+	      this.labelEl = inputEx.cn('label', null, null, this.options.label === "" ? "&nbsp;" : this.options.label);
 	      this.labelDiv.appendChild(this.labelEl);
 	      this.divEl.appendChild(this.labelDiv);
       }
@@ -2690,6 +2711,9 @@ lang.extend( inputEx.CombineField, inputEx.Group, {
       	
       	this.appendSeparator(i+1);
 	   }
+	
+		this.setFieldName(this.options.name);
+	
 	      
 	},
 	
@@ -2706,15 +2730,6 @@ lang.extend( inputEx.CombineField, inputEx.Group, {
       
       return inputEx.CombineField.superclass.renderField.call(this, fieldOptions);
    },
-
-	/**
-	 * Override to set the field names
-	 */
-	renderFields: function(parentEl) {
-		inputEx.CombineField.superclass.renderFields.call(this,parentEl);
-		
-		this.setFieldName(this.options.name);
-	},
 	
 	
 	setFieldName: function(name) {
@@ -3964,13 +3979,13 @@ inputEx.DateSplitField = function(options) {
    options.fields = [];
    for(var i = 0 ; i < 3 ; i++) {
       if(i == this.dayIndex) {
-         options.fields.push({type: 'integer', typeInvite: inputEx.messages.dayTypeInvite, size: 2 });
+         options.fields.push({type: 'integer', typeInvite: inputEx.messages.dayTypeInvite, size: 2, trim: true });
       }
       else if(i == this.yearIndex) {
-         options.fields.push({type: 'integer', typeInvite: inputEx.messages.yearTypeInvite, size: 4 });
+         options.fields.push({type: 'integer', typeInvite: inputEx.messages.yearTypeInvite, size: 4, trim: true });
       }
       else {
-         options.fields.push({type: 'integer', typeInvite: inputEx.messages.monthTypeInvite, size: 2 });
+         options.fields.push({type: 'integer', typeInvite: inputEx.messages.monthTypeInvite, size: 2, trim: true });
       }
    }
 
@@ -4805,7 +4820,7 @@ inputEx.registerType("inplaceedit", inputEx.InPlaceEdit, [
  * @constructor
  * @param {Object} options Added options:
  * <ul>
- *    <li>negative: boolean indicating if we accept boolean numbers</li>
+ *    <li>negative: boolean indicating if we accept negative numbers</li>
  * </ul>
  */
 inputEx.IntegerField = function(options) {
@@ -4829,19 +4844,26 @@ YAHOO.lang.extend(inputEx.IntegerField, inputEx.StringField, {
     * @return {int} The integer value
     */
    getValue: function() {
+      
+      var str_value;
+      
+      // StringField getValue (handles typeInvite and trim options)
+      str_value = inputEx.IntegerField.superclass.getValue.call(this);
+      
       // don't return NaN if empty field
-      if ((this.options.typeInvite && this.el.value == this.options.typeInvite) || this.el.value == '') {
+      if (str_value === '') {
          return '';
       }
       
-      return parseInt(this.el.value, 10);
+      return parseInt(str_value, 10);
    },
    
    /**
     * Validate  if is a number
     */
    validate: function() {
-      var v = this.getValue();
+      
+      var v = this.getValue(), str_value = inputEx.IntegerField.superclass.getValue.call(this);
       
       // empty field
       if (v === '') {
@@ -4849,8 +4871,12 @@ YAHOO.lang.extend(inputEx.IntegerField, inputEx.StringField, {
          return !this.options.required;
       }
       
-      if(isNaN(v)) return false;
-      return !!this.el.value.match(new RegExp(this.options.negative ? "^[+-]?[0-9]*$" : "^\\+?[0-9]*$") ) && v >= this.options.min && v <= this.options.max;
+      if (isNaN(v)) {
+         return false;
+      }
+      
+      return !!str_value.match(/^[\+\-]?[0-9]+$/) && (this.options.negative ? true : v >= 0) && v >= this.options.min && v <= this.options.max;
+      
    }
    
 });
@@ -4892,6 +4918,14 @@ inputEx.ListField = function(options) {
    inputEx.ListField.superclass.constructor.call(this, options);
 };
 lang.extend(inputEx.ListField,inputEx.Field, {
+
+	/**
+	 * Colors for the animation
+	 */
+	arrowAnimColors: { 
+		from: '#eeee33',
+		to: '#eeeeee' 
+	},
 	   
 	/**
 	 * Set the ListField classname
@@ -5115,8 +5149,7 @@ lang.extend(inputEx.ListField,inputEx.Field, {
 	   var el = inputEx(opts,this);
 	   
 	   var subFieldEl = el.getEl();
-	   Dom.setStyle(subFieldEl, 'margin-left', '4px');
-	   Dom.setStyle(subFieldEl, 'float', 'left');
+		YAHOO.util.Dom.addClass(subFieldEl, 'inputEx-ListField-subFieldEl');
 	   newDiv.appendChild( subFieldEl );
 	   
 	   // Subscribe the onChange event to resend it 
@@ -5185,7 +5218,7 @@ lang.extend(inputEx.ListField,inputEx.Field, {
 	      if(this.arrowAnim) {
 	         this.arrowAnim.stop(true);
 	      }
-	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: { from: '#eeee33' , to: '#eeeeee' }}, 0.4);
+	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: this.arrowAnimColors}, 0.4);
 	      this.arrowAnim.onComplete.subscribe(function() { Dom.setStyle(insertedEl, 'background-color', ''); });
 	      this.arrowAnim.animate();
 	      
@@ -5231,7 +5264,7 @@ lang.extend(inputEx.ListField,inputEx.Field, {
 	      if(this.arrowAnim) {
 	         this.arrowAnim.stop(true);
 	      }
-	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: { from: '#eeee33' , to: '#eeeeee' }}, 1);
+	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: this.arrowAnimColors }, 1);
 	      this.arrowAnim.onComplete.subscribe(function() { Dom.setStyle(insertedEl, 'background-color', ''); });
 	      this.arrowAnim.animate();
 	      
@@ -5335,19 +5368,26 @@ YAHOO.lang.extend(inputEx.NumberField, inputEx.StringField, {
     * @return {Number} The parsed float
     */
    getValue: function() {
+	
+      var str_value;
+      
+      // StringField getValue (handles typeInvite and trim options)
+      str_value = inputEx.NumberField.superclass.getValue.call(this);
+      
       // don't return NaN if empty field
-      if ((this.options.typeInvite && this.el.value == this.options.typeInvite) || this.el.value == '') {
+      if (str_value === '') {
          return '';
       }
       
-      return parseFloat(this.el.value);
+      return parseFloat(str_value);
    },
    
    /**
     * Check if the entered number is a float
     */
    validate: function() { 
-      var v = this.getValue();
+      
+      var v = this.getValue(), str_value = inputEx.NumberField.superclass.getValue.call(this);
       
       // empty field
       if (v === '') {
@@ -5355,10 +5395,13 @@ YAHOO.lang.extend(inputEx.NumberField, inputEx.StringField, {
          return !this.options.required;
       }
       
-      if(isNaN(v)) return false;
-	   
-	   // We have to check the number with a regexp, otherwise "0.03a" is parsed to a valid number 0.03
-	   return !!this.el.value.match(/^([\+\-]?((([0-9]+(\.)?)|([0-9]*\.[0-9]+))([eE][+-]?[0-9]+)?))$/) && v >= this.options.min && v <= this.options.max;
+      if (isNaN(v)) {
+         return false;
+      }
+      
+      // We have to check the number with a regexp, otherwise "0.03a" is parsed to a valid number 0.03
+      return !!str_value.match(/^([\+\-]?((([0-9]+(\.)?)|([0-9]*\.[0-9]+))([eE][+-]?[0-9]+)?))$/) && v >= this.options.min && v <= this.options.max;
+      
    }
 
 });
@@ -5732,7 +5775,7 @@ inputEx.registerType("password", inputEx.PasswordField, [
 			// Build a "any" radio combined with a StringField
 			if (this.options.allowAny) {
 				
-				this.allowAnyChoice = this.addChoice({ value: 'inputEx-RadioField-allowAny', label:'' });
+				this.allowAnyChoice = this.addChoice({ value: this.options.allowAny.value, label:'' });
 				
 				this.radioAny = this.allowAnyChoice.node.firstChild;
 				
@@ -5789,10 +5832,13 @@ inputEx.registerType("password", inputEx.PasswordField, [
 			// AnyField events
 			if (this.allowAnyChoice) {
 				
-				this.anyField.updatedEvt.subscribe(function (e) {
+				this.anyField.updatedEvt.subscribe(function (e, params) {
 					
-					//inputEx.RadioField.superclass.onChange.call(this,e);
+					var value = params[0];
+					this.radioAny.value = value;
+					
 					this.setClassFromState();
+					
 					inputEx.RadioField.superclass.onChange.call(this,e);
 					
 				}, this, true);
@@ -5880,19 +5926,22 @@ inputEx.registerType("password", inputEx.PasswordField, [
 		},
 		
 		/**
-		 * Set the value of the checkedbox
+		 * Set the value of the Radio
 		 * @param {Any} value The value schould be one of this.options.values (which defaults to this.options.choices if missing) if allowAny option not true.
 		 * @param {boolean} [sendUpdatedEvt] (optional) Wether this setValue should fire the updatedEvt or not (default is true, pass false to NOT send the event)
 		 */
 		setValue: function (value, sendUpdatedEvt) {
 			
-			var checkAny = true, i, length;
+			var checkAny = true, valueFound = false, i, length;
 			
 			for (i = 0, length = this.choicesList.length ; i < length ; i += 1) {
 				
-				if (value === this.choicesList[i].value) {
+				// valueFound is a useful when "real" choice has a value equal to allowAny choice default value
+				// so we check only the first value-matching radio button
+				if (value === this.choicesList[i].value && !valueFound) {
 					
 					this.choicesList[i].node.firstChild.checked = true;
+					valueFound = true;
 					checkAny = false;
 					
 				} else {
@@ -5906,6 +5955,7 @@ inputEx.registerType("password", inputEx.PasswordField, [
 				
 				if (checkAny) {
 					this.radioAny.checked = true;
+					this.radioAny.value = value;
 					this.anyField.enable();
 					this.anyField.setValue(value, false);
 				} else {
@@ -5922,7 +5972,8 @@ inputEx.registerType("password", inputEx.PasswordField, [
 		 * @param {boolean} [sendUpdatedEvt] (optional) Wether this clear should fire the updatedEvt or not (default is true, pass false to NOT send the event)
 		 */
 		clear: function (sendUpdatedEvt) {
-			if(this.radioAny){
+			
+			if (this.radioAny){
 				this.anyField.setValue(this.options.allowAny.value, false);
 			}
 		
@@ -7172,9 +7223,9 @@ inputEx.widget.DDList.prototype = {
     * @param {Integer} index Item index
     * @param {Any} value New value
     */
-   updateItem: function(index,value) {
-      this.items[index] = value;
-      this.ul.childNodes[index].childNodes[0].innerHTML = value;
+   updateItem: function(index, item) {
+      this.items[index] = (typeof item == "object") ? item.value : item;
+      this.ul.childNodes[index].childNodes[0].innerHTML = (typeof item == "object") ? item.label : item;
    },
    
    /**
@@ -7275,7 +7326,7 @@ inputEx.widget.DDList.prototype = {
 				
 				this.ddlist.addItem({ value: value, label: choice.label });
 				
-				// hide choice (+ select first choice)
+				// hide choice that has just been selected (+ select first choice)
 				this.hideChoice({ position : position });
 				this.el.selectedIndex = 0;
 				
@@ -7297,12 +7348,12 @@ inputEx.widget.DDList.prototype = {
 				return;
 			}
 			
-			// Re-enable all choices
-			for (i = 0, length=this.choicesList.length ; i < length ; i += 1) {
-				this.enableChoice(i);
+			// Re-show all choices
+			for (i = 0, length = this.choicesList.length; i < length; i += 1) {
+				this.showChoice({ position : i });
 			}
 			
-			// disable selected choices and fill ddlist value
+			// Hide selected choices and fill ddlist value
 			for (i = 0, length=value.length ; i < length ; i += 1) {
 				
 				position = this.getChoicePosition({ value : value[i] });
@@ -7310,14 +7361,16 @@ inputEx.widget.DDList.prototype = {
 				
 				ddlistValue.push({ value: choice.value, label: choice.label });
 				
-				this.disableChoice({ position: position });
+				this.hideChoice({ position: position });
 			}
 			
 			// set ddlist value
 			this.ddlist.setValue(ddlistValue);
 			
+			// reset select to first choice
+			this.el.selectedIndex = 0;
 			
-			if(sendUpdatedEvt !== false) {
+			if (sendUpdatedEvt !== false) {
 				// fire update event
 				this.fireUpdatedEvt();
 			}

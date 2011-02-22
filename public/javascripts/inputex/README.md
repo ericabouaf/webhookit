@@ -9,7 +9,9 @@ Disclaimer: It doesn't use existing html yet. (it is not an unobtrusive library 
 
 For detailed informations, have a look at our complete documentation.
 
-It is built on top of the [YUI library](http://developer.yahoo.com/yui/) (2.8.0r4) and supports all major browsers. Please report your specific browser issues in the forum.
+It is built on top of the [YUI library](http://developer.yahoo.com/yui/) (2.8.x branch) and supports all major browsers. Please report your specific browser issues in the forum.
+
+New: Now works with [YUI3 Loading](http://neyric.github.com/inputex/examples/yui3-loader.html)
 
 Resources
 =========

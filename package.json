@@ -1,6 +1,6 @@
 {
     "name": "webhookit",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "WebHookIt",
     "author": "Eric Abouaf <eric.abouaf@gmail.com>",
     "bugs": { "web" : "http://github.com/neyric/webhookit/issues" },
@@ -9,7 +9,7 @@
         "Eric Abouaf <eric.abouaf@gmail.com> (http://neyric.com)"
     ],
     "engines": {
-        "node" : ">=0.2.5"
+        "node" : ">=0.4.0"
     },
     "directories": {
         "lib" : "lib"
@@ -18,21 +18,18 @@
 			"webhookit" : "./server.js"
 		},
     "dependencies": {
-				"connect": ">=0.3.0",
-				"express": ">=1.0.0",
-				"express-contrib": ">=0.0.1",
+				"connect": ">=0.5.10",
+				"express": ">=1.0.7",
 				"mongodb": ">=0.7.9",
 				"cron": ">=0.1.0",
 				"ejs": ">=0.2.0",
 				"should": ">=0.0.4",
-				"webhookit-comment": "0.0.1",
-				"webhookit-ejs": "0.0.1",
-				"webhookit-email": "0.0.1",
-				"webhookit-http": "0.0.1",
-				"webhookit-jsonpath": "0.0.1",
-				"webhookit-objectbuilder": "0.0.1",
-				"webhookit-soupselect": "0.0.1",
-				"webhookit-yql": "0.0.1"
+				"webhookit-comment": "0.0.2",
+				"webhookit-ejs": "0.0.2",
+				"webhookit-http": "0.0.4",
+				"webhookit-jsonpath": "0.0.2",
+				"webhookit-objectbuilder": "0.0.2",
+				"webhookit-yql": "0.0.2"
     },
     "licenses":[  {"type" : "MIT"} ],
     "repository": {

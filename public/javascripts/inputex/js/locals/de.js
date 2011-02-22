@@ -40,6 +40,9 @@
    msgs.stringTooShort = ["Dieses Feld braucht mindestens "," Zeichen (Buchstaben oder Zahlen)"];
    msgs.stringTooLong = ["Dieses Feld ist begrenzt auf "," Zeichen (Buchstaben oder Zahlen)"];
    msgs.ajaxWait = "lade...";
+	msgs.menuTypeInvite = 'Auswählen';
+	msgs.didYouMeant = 'Meinten Sie: ';
+	msgs.emptyInPlaceEdit = '(Bearbeiten)';
    
    // List
    msgs.listAddLink = "Hinzufügen";

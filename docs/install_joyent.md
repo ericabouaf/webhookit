@@ -45,7 +45,7 @@ npm is pre-installed on your node machine, update it with :
 
 Install WebHookIt dependencies :
 
-    $ npm install express express-contrib xml2js ejs mongodb cron email yql soupselect
+    $ npm install express xml2js-expat ejs mongodb cron
     
 ## Deploy with Git
     

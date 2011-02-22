@@ -1,7 +1,6 @@
 (function() {
 
    var lang = YAHOO.lang;
-   var inputEx = YAHOO.inputEx;
    
 inputEx.widget.ListCustom = function(options) {
   

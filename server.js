@@ -1,4 +1,3 @@
-#!/usr/bin/node
 /**
  * server.js
  * 	- set up an Express.js server	
@@ -10,8 +9,8 @@
 var connect = require('connect'),
 	 express = require('express'),
 	 fs = require('fs'),
-	 Db = require('mongodb/db').Db,
-    Server = require('mongodb/connection').Server;
+	 Db = require('mongodb').Db,
+    Server = require('mongodb').Server;
 
 // express server
 var app = express.createServer();
@@ -61,7 +60,29 @@ app.db.open(function() {
 	);
 
 	app.dynamicHelpers({
-		 messages: require('express-contrib').messages,		// req.flash to html helper
+		 // req.flash to html helper
+		 messages: function(req, res){
+		    return function(){
+		        var buf = [],
+		            messages = req.flash(),
+		            types = Object.keys(messages),
+		            len = types.length;
+		        if (!len) return '';
+		        buf.push('<div id="messages">');
+		        for (var i = 0; i < len; ++i) {
+		            var type = types[i],
+		                msgs = messages[type];
+		            buf.push('  <ul class="' + type + '">');
+		            for (var j = 0, len = msgs.length; j < len; ++j) {
+		                var msg = msgs[j];
+		                buf.push('    <li>' + msg + '</li>');
+		            }
+		            buf.push('  </ul>');
+		        }
+		        buf.push('</div>');
+		        return buf.join('\n');
+		    }
+		},		
 	    current_user: function(req, res){
 	        return req.current_user;
 	    }

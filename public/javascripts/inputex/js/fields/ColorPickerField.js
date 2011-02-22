@@ -1,6 +1,6 @@
 (function() {
 	
-   var widget = YAHOO.widget, Event = YAHOO.util.Event, Dom = YAHOO.util.Dom;
+   var Event = YAHOO.util.Event, Dom = YAHOO.util.Dom;
 	
 /**
  * Create a Color picker input field
@@ -56,12 +56,12 @@ YAHOO.lang.extend(inputEx.ColorPickerField, inputEx.Field, {
 
 		// Create a Menu instance to house the ColorPicker instance
 		this.menuElId = Dom.generateId();
-		var oColorPickerMenu = new widget.Menu(this.menuElId);
+		var oColorPickerMenu = new YAHOO.widget.Menu(this.menuElId);
 		this.oColorPickerMenu = oColorPickerMenu;
 
 		// Create a Button instance of type "menu"
 		this.labelElId = Dom.generateId();
-		var oButton = new widget.Button({ 
+		var oButton = new YAHOO.widget.Button({ 
 			type: "menu", 
 			className: "inputEx-ColorPicker-Button",
 			label: "<em id=\""+this.labelElId+"\" class='inputEx-ColorPicker-Label'>Current color is #FFFFFF.</em>", 
@@ -95,7 +95,7 @@ YAHOO.lang.extend(inputEx.ColorPickerField, inputEx.Field, {
 		// Remove this event listener so that this code runs only once
 		this.oButton.unsubscribe("click", this.onButtonClickOnce, this);
 		
-		this.oColorPicker = new widget.ColorPicker(this.oColorPickerMenu.body.id, this.options.colorPickerOptions);
+		this.oColorPicker = new YAHOO.widget.ColorPicker(this.oColorPickerMenu.body.id, this.options.colorPickerOptions);
 		
 		if(this.options.value) {
 			this.oColorPicker.set("hex", this.options.value.substr(1));

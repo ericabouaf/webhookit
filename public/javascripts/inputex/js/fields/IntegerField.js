@@ -9,7 +9,7 @@
  * @constructor
  * @param {Object} options Added options:
  * <ul>
- *    <li>negative: boolean indicating if we accept boolean numbers</li>
+ *    <li>negative: boolean indicating if we accept negative numbers</li>
  * </ul>
  */
 inputEx.IntegerField = function(options) {
@@ -33,19 +33,26 @@ YAHOO.lang.extend(inputEx.IntegerField, inputEx.StringField, {
     * @return {int} The integer value
     */
    getValue: function() {
+      
+      var str_value;
+      
+      // StringField getValue (handles typeInvite and trim options)
+      str_value = inputEx.IntegerField.superclass.getValue.call(this);
+      
       // don't return NaN if empty field
-      if ((this.options.typeInvite && this.el.value == this.options.typeInvite) || this.el.value == '') {
+      if (str_value === '') {
          return '';
       }
       
-      return parseInt(this.el.value, 10);
+      return parseInt(str_value, 10);
    },
    
    /**
     * Validate  if is a number
     */
    validate: function() {
-      var v = this.getValue();
+      
+      var v = this.getValue(), str_value = inputEx.IntegerField.superclass.getValue.call(this);
       
       // empty field
       if (v === '') {
@@ -53,8 +60,12 @@ YAHOO.lang.extend(inputEx.IntegerField, inputEx.StringField, {
          return !this.options.required;
       }
       
-      if(isNaN(v)) return false;
-      return !!this.el.value.match(new RegExp(this.options.negative ? "^[+-]?[0-9]*$" : "^\\+?[0-9]*$") ) && v >= this.options.min && v <= this.options.max;
+      if (isNaN(v)) {
+         return false;
+      }
+      
+      return !!str_value.match(/^[\+\-]?[0-9]+$/) && (this.options.negative ? true : v >= 0) && v >= this.options.min && v <= this.options.max;
+      
    }
    
 });

@@ -29,6 +29,14 @@ inputEx.ListField = function(options) {
    inputEx.ListField.superclass.constructor.call(this, options);
 };
 lang.extend(inputEx.ListField,inputEx.Field, {
+
+	/**
+	 * Colors for the animation
+	 */
+	arrowAnimColors: { 
+		from: '#eeee33',
+		to: '#eeeeee' 
+	},
 	   
 	/**
 	 * Set the ListField classname
@@ -252,8 +260,7 @@ lang.extend(inputEx.ListField,inputEx.Field, {
 	   var el = inputEx(opts,this);
 	   
 	   var subFieldEl = el.getEl();
-	   Dom.setStyle(subFieldEl, 'margin-left', '4px');
-	   Dom.setStyle(subFieldEl, 'float', 'left');
+		YAHOO.util.Dom.addClass(subFieldEl, 'inputEx-ListField-subFieldEl');
 	   newDiv.appendChild( subFieldEl );
 	   
 	   // Subscribe the onChange event to resend it 
@@ -322,7 +329,7 @@ lang.extend(inputEx.ListField,inputEx.Field, {
 	      if(this.arrowAnim) {
 	         this.arrowAnim.stop(true);
 	      }
-	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: { from: '#eeee33' , to: '#eeeeee' }}, 0.4);
+	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: this.arrowAnimColors}, 0.4);
 	      this.arrowAnim.onComplete.subscribe(function() { Dom.setStyle(insertedEl, 'background-color', ''); });
 	      this.arrowAnim.animate();
 	      
@@ -368,7 +375,7 @@ lang.extend(inputEx.ListField,inputEx.Field, {
 	      if(this.arrowAnim) {
 	         this.arrowAnim.stop(true);
 	      }
-	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: { from: '#eeee33' , to: '#eeeeee' }}, 1);
+	      this.arrowAnim = new YAHOO.util.ColorAnim(insertedEl, {backgroundColor: this.arrowAnimColors }, 1);
 	      this.arrowAnim.onComplete.subscribe(function() { Dom.setStyle(insertedEl, 'background-color', ''); });
 	      this.arrowAnim.animate();
 	      

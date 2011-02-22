@@ -233,6 +233,11 @@ div.inputEx-ListField-ArrowDown {
    background: transparent url(../images/bullet_arrow_down.png) no-repeat scroll 0%;
 }
 
+div.inputEx-ListField-subFieldEl {
+  float:left;
+  margin-left:4px;
+}
+
 a.inputEx-List-link {
    color: blue;
    cursor: pointer;
@@ -650,6 +655,10 @@ tbody.yui-dt-data div.inputEx-dtInPlaceEdit-deleteLinkSpinner{
 	width:16px;
 	height:16px;
 	background:transparent url(../images/ajax-loader.gif) no-repeat scroll 20px 4px;
+}
+
+.yui-dt-editor .yui-dt-button button {
+  width: auto;
 }
 
 /**
