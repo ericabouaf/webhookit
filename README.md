@@ -8,7 +8,7 @@ Visual scripting for the web, Pipes for Hackers, using Node.js and mongoDB
 
 ## Requirements
 
- * [Node.js](http://nodejs.org/) (>= 0.2.5)
+ * [Node.js](http://nodejs.org/) (>= 0.4.0)
  * [npm](http://npmjs.org/)
  * [mongoDB](http://www.mongodb.org/)
 

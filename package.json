@@ -18,18 +18,17 @@
 			"webhookit" : "./server.js"
 		},
     "dependencies": {
-				"connect": ">=0.5.10",
 				"express": ">=1.0.7",
 				"mongodb": ">=0.7.9",
 				"cron": ">=0.1.0",
 				"ejs": ">=0.2.0",
-				"should": ">=0.0.4",
-				"webhookit-comment": "0.0.2",
-				"webhookit-ejs": "0.0.2",
-				"webhookit-http": "0.0.4",
-				"webhookit-jsonpath": "0.0.2",
-				"webhookit-objectbuilder": "0.0.2",
-				"webhookit-yql": "0.0.2"
+				"webhookit-comment": ">=0.0.2",
+				"webhookit-ejs": ">=0.0.2",
+				"webhookit-http": ">=0.0.4",
+				"webhookit-jsonpath": ">=0.0.2",
+				"webhookit-objectbuilder": ">=0.0.2",
+				"webhookit-xml2js": ">=0.0.1",
+				"webhookit-jsonparse": ">=0.0.1"
     },
     "licenses":[  {"type" : "MIT"} ],
     "repository": {

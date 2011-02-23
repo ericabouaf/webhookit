@@ -18,8 +18,7 @@ Create a directory structure like this one :
  * mymodule/
    * package.json
    * lib/
-     * webhookit-mymodule/
-       * index.js
+     * webhookit-mymodule.js
 
 The index.js file must contain
 
@@ -36,7 +35,7 @@ Then, configure the package.json file :
             "Eric Abouaf <eric.abouaf@gmail.com> (http://neyric.com)"
         ],
         "engines": {
-            "node" : ">=0.2.5"
+            "node" : ">=0.4.0"
         },
         "directories": {
             "lib" : "./lib"

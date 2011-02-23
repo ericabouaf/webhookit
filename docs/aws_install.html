@@ -123,15 +123,17 @@ apt-get upgrade -y
 
 apt-get install -y build-essential git-core nginx libssl-dev pkg-config
 
+NODEVERSION=0.4.1
+
 # Node.js
-wget http://nodejs.org/dist/node-v0.2.5.tar.gz
-tar xvzf node-v0.2.5.tar.gz
-cd node-v0.2.5
+wget http://nodejs.org/dist/node-v$NODEVERSION.tar.gz
+tar xvzf node-v$NODEVERSION.tar.gz
+cd node-v$NODEVERSION
 ./configure
 make
 make install
 cd ..
-node-v0.2.5.tar.gz
+node-v$NODEVERSION.tar.gz
 
 # NPM
 curl http://npmjs.org/install.sh | sh
