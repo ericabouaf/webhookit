@@ -18,10 +18,12 @@
 			"webhookit" : "./server.js"
 		},
     "dependencies": {
-				"express": ">=1.0.7",
-				"mongodb": ">=0.7.9",
+				"express": "2.5.1",
+				"mongodb": "0.9.7-1.4",
 				"cron": ">=0.1.0",
-				"ejs": ">=0.2.0",
+				"ejs": "0.2.0",
+				"npm": "1.0.106",
+				"connect": "1.7.1",
 				"webhookit-comment": ">=0.0.2",
 				"webhookit-ejs": ">=0.0.2",
 				"webhookit-http": ">=0.0.4",

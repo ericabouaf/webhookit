@@ -6,8 +6,7 @@
  * 	- configure various middleware
  * 	- load controllers & helpers
  */
-var connect = require('connect'),
-	 express = require('express'),
+var express = require('express'),
 	 fs = require('fs'),
 	 Db = require('mongodb').Db,
     Server = require('mongodb').Server;
@@ -29,9 +28,9 @@ app.db.open(function() {
 	
 	// Middleware setup
 	app.use(express.logger());				// Enable request logging	
-	app.use(express.bodyDecoder());		// parses urlencoded request bodies which populates req.body
+	app.use(express.bodyParser());		// parses urlencoded request bodies which populates req.body
 	app.use(express.methodOverride());	// sets a hidden input of _method to an arbitrary HTTP method 
-	app.use(express.cookieDecoder());	// Required by session
+	app.use(express.cookieParser());	// Required by session
 
 	// Use a custom MongoSessionStore
 	var MongoSessionStore = require(app.root + '/lib/mongo-session-store.js');
@@ -89,8 +88,7 @@ app.db.open(function() {
 	});
 
 	app.use(app.router);
-	app.use(express.staticProvider(app.root + '/public'));
-	app.use(connect.favicon());
+	app.use(express.static(app.root + '/public'));
 
 	app.set('views', app.root + '/lib/views');
 	app.set('view engine', 'ejs');
