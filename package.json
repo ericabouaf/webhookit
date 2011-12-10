@@ -3,7 +3,7 @@
     "version": "0.0.2",
     "description": "WebHookIt",
     "author": "Eric Abouaf <eric.abouaf@gmail.com>",
-    "bugs": { "web" : "http://github.com/neyric/webhookit/issues" },
+    "bugs": { "url" : "http://github.com/neyric/webhookit/issues" },
     "os": ["darwin", "linux"],
     "contributors": [
         "Eric Abouaf <eric.abouaf@gmail.com> (http://neyric.com)"
