@@ -6,7 +6,6 @@
  * Commit WireIt or inputEx patches in their own repositories
  * Create [custom modules](custom-modules.html) 
    * and deploy them using [NPM packages](custom-modules-packages.html)
-   * or fork the [webhookit-packages](http://github.com/neyric/webhookit-packages) repository
  
 ## Don't
  

@@ -5,8 +5,6 @@
 
 WebHookIt core modules are distributed through the npm(http://npmjs.org/) package manager, which means you can contribute WebHookIt modules by publishing a package to the [npm registry](http://search.npmjs.org/) called "webhookit-<i>mymodule</i>".
 
-Basic modules are available on this repository: [https://github.com/neyric/webhookit-packages](https://github.com/neyric/webhookit-packages)
-
 The WebHookIt modules can be installed/updated/uninstalled from the /packages page. This page automatically lists all packages called "webhookit-mymodule" from the npm registry.
 
 
@@ -29,13 +27,13 @@ Then, configure the package.json file :
         "version": "0.0.1",
         "description": "YQL module for WebHookIt",
         "author": "Eric Abouaf <eric.abouaf@gmail.com>",
-        "bugs": { "web" : "http://github.com/neyric/webhookit-packages/issues" },
+        "bugs": { "url" : "http://github.com/neyric/webhookit/issues" },
         "os": ["darwin", "linux"],
         "contributors": [
             "Eric Abouaf <eric.abouaf@gmail.com> (http://neyric.com)"
         ],
         "engines": {
-            "node" : ">=0.4.0"
+            "node" : ">=0.6.7"
         },
         "directories": {
             "lib" : "./lib"
@@ -47,7 +45,7 @@ Then, configure the package.json file :
         "licenses":[  {"type" : "MIT"} ],
         "repository": {
             "type":"git",
-            "url":"http://github.com/neyric/webhookit-packages.git"
+            "url":"http://github.com/neyric/webhookit.git"
         }
     }
 
