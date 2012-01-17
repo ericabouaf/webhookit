@@ -1,0 +1,15 @@
+
+ * YUI3 & bootstrap.css (run form, layout, etc...)
+
+LATER :
+
+ * Update Cron doesn't work
+
+ * Move cron to TRIGGERS
+ 
+ * Move url(+template) to TRIGGERS
+
+ * Implement triggers in visual language
+
+ * remove Makefile and move doc to bootstrap.css
+
