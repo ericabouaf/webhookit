@@ -16,6 +16,8 @@ Visual scripting for the web, Pipes for Hackers, using Node.js and mongoDB
 
     git clone git://github.com/neyric/webhookit.git
     cd webhookit
+    git submodule init
+    git submodule update
     npm install .
     
 ## Run

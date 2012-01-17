@@ -1,0 +1,6 @@
+[submodule "public/inputex"]
+	path = public/inputex
+	url = git://github.com/neyric/inputex.git
+[submodule "public/wireit"]
+	path = public/wireit
+	url = git://github.com/neyric/wireit.git
