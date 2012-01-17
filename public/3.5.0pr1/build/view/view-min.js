@@ -1,0 +1,7 @@
+/*
+YUI 3.5.0pr1 (build 4342)
+Copyright 2011 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+YUI.add("view",function(b){function a(){a.superclass.constructor.apply(this,arguments);}b.View=b.extend(a,b.Base,{events:{},template:"",initializer:function(c){c||(c={});this._attachedViewEvents=[];c.template&&(this.template=c.template);this.events=c.events?b.merge(this.events,c.events):this.events;this.attachEvents(this.events);},destructor:function(){this._destroyContainer();this._attachedViewEvents=[];},attachEvents:function(g){var d=this.get("container"),i=b.Object.owns,h,e,f,c;this.detachEvents();g||(g=this.events);for(c in g){if(!i(g,c)){continue;}e=g[c];for(f in e){if(!i(e,f)){continue;}h=e[f];if(typeof h==="string"){h=this[h];}this._attachedViewEvents.push(d.delegate(f,h,c,this));}}},create:function(c){return b.one(c);},detachEvents:function(){b.Array.each(this._attachedViewEvents,function(c){c.detach();});},remove:function(){var c=this.get("container");c&&c.remove();return this;},render:function(){return this;},_destroyContainer:function(){var c=this.get("container");c&&c.remove(true);}},{NAME:"view",ATTRS:{container:{valueFn:function(){return b.Node.create("<div/>");},setter:"create",writeOnce:"initOnly"},model:{value:null},modelList:{value:null}}});},"3.5.0pr1",{requires:["base-build","node-event-delegate"]});
