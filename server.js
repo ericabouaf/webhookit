@@ -9,7 +9,9 @@
 var express = require('express'),
 	 fs = require('fs'),
 	 Db = require('mongodb').Db,
-    Server = require('mongodb').Server;
+    Server = require('mongodb').Server,
+    connect = require('connect'),
+    mongoStore = require('connect-mongodb');
 
 // express server
 var app = express.createServer();
@@ -32,14 +34,12 @@ app.db.open(function() {
 	app.use(express.methodOverride());	// sets a hidden input of _method to an arbitrary HTTP method 
 	app.use(express.cookieParser());	// Required by session
 
-	// Use a custom MongoSessionStore
-	var MongoSessionStore = require(app.root + '/lib/mongo-session-store.js');
-	app.use(express.session({ 
-		store: new MongoSessionStore({db: app.db}),
-		
-		key: app.config.sessions.key,
-		secret: app.config.sessions.secret
-	}));	// To use sessions
+	// Use connect-mongodb SessionStore
+	app.use( connect.session({
+       cookie: {maxAge: 60000 * 20}, // 20 minutes
+       secret: app.config.sessions.secret,
+       store: new mongoStore({db: app.db})
+   }));
 
 	// User model
 	User = require(app.root + '/lib/user').init(app.db);
@@ -66,13 +66,15 @@ app.db.open(function() {
 		            messages = req.flash(),
 		            types = Object.keys(messages),
 		            len = types.length;
-		        if (!len) return '';
+		        if (!len) {
+		           return '';
+	           }
 		        buf.push('<div id="messages">');
-		        for (var i = 0; i < len; ++i) {
+		        for (var i = 0 ; i < len; ++i) {
 		            var type = types[i],
-		                msgs = messages[type];
+		                msgs = messages[type], j;
 		            buf.push('  <ul class="' + type + '">');
-		            for (var j = 0, len = msgs.length; j < len; ++j) {
+		            for (j = 0, len = msgs.length; j < len; ++j) {
 		                var msg = msgs[j];
 		                buf.push('    <li>' + msg + '</li>');
 		            }
@@ -80,7 +82,7 @@ app.db.open(function() {
 		        }
 		        buf.push('</div>');
 		        return buf.join('\n');
-		    }
+		    };
 		},		
 	    current_user: function(req, res){
 	        return req.current_user;
@@ -88,7 +90,7 @@ app.db.open(function() {
 	});
 
 	app.use(app.router);
-	app.use(express.static(app.root + '/public'));
+	app.use(express["static"](app.root + '/public'));
 
 	app.set('views', app.root + '/lib/views');
 	app.set('view engine', 'ejs');
