@@ -117,6 +117,11 @@ app.db.open(function(err) {
 		(!!req.current_user) ? next() : next(new Error('Unauthorized'));
 	};
 	
+	
+	// YUI Combo Handler
+	var YuiComboHandler = require('express-yuicombo').YuiComboHandler;
+	app.get('/yui-combo', YuiComboHandler('./public/') );
+	
 	// Require all helpers & controllers
 	var loadDirs = ['helpers', 'controllers'];
 	loadDirs.forEach(function(dir) {
