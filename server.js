@@ -76,16 +76,17 @@ app.db.open(function(err) {
 		        if (!len) {
 		           return '';
 	           }
-		        buf.push('<div id="messages">');
+	           var type = types[0];
+		        buf.push('<div class="alert-message block-message '+ type +'">');
 		        for (var i = 0 ; i < len; ++i) {
 		            var type = types[i],
 		                msgs = messages[type], j;
-		            buf.push('  <ul class="' + type + '">');
+		            buf.push('<ul>');
 		            for (j = 0, len = msgs.length; j < len; ++j) {
 		                var msg = msgs[j];
-		                buf.push('    <li>' + msg + '</li>');
+		                buf.push('<li>' + msg + '</li>');
 		            }
-		            buf.push('  </ul>');
+		            buf.push('</ul>');
 		        }
 		        buf.push('</div>');
 		        return buf.join('\n');

@@ -1,7 +1,15 @@
 
  * YUI3 & bootstrap.css (run form, layout, etc...)
 
+ * Editor save & load from server
+
+ * Use winston to log
+ 
+ * Fix package installation
+
 LATER :
+
+ * SOAP import to modules with node soap (npm install soap)
 
  * Update Cron doesn't work
 
