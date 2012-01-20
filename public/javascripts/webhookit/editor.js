@@ -307,4 +307,4 @@ Y.WireItApp = new Y.Base.create('contributorsApp', Y.App, [], {
 });
 
 
-}, '3.5.0pr1', {requires: ['app', 'handlebars', 'model', 'model-list', 'json', 'view', 'layer', 'bezier-wire', 'anim', 'image-container', 'form-container', 'io-base']});
+}, '3.5.0pr1', {requires: ['app', 'handlebars', 'model', 'model-list', 'json', 'view', 'layer', 'bezier-wire', 'anim', 'image-container', 'form-container', 'io-base', 'textarea-container', 'inputex-string', 'inputex-list', 'inputex-combine', 'inputex-select','inputex-checkbox','inputex-type']});

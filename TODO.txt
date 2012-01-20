@@ -1,13 +1,15 @@
 
- * YUI3 & bootstrap.css (run form, layout, etc...)
-
  * Editor save & load from server
 
+ * Fix base modules
+
  * Use winston to log
- 
- * Fix package installation
+
+ * Fix runtime
 
 LATER :
+
+ * Fix package installation
 
  * SOAP import to modules with node soap (npm install soap)
 
