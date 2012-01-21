@@ -1,11 +1,12 @@
 
- * Editor save & load from server
+ * Editor save & load from server (started)
+ * Fix runtime (started)
+ * Fix base modules (started)
+    - plein de couilles sur le remove (icon close)
 
- * Fix base modules
+ * Wire zIndex !!!!
 
- * Use winston to log
-
- * Fix runtime
+ * Use colors for log (+ winston ?)
 
 LATER :
 

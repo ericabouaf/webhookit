@@ -35,7 +35,7 @@ app.db.open(function(err) {
 	}
 	
 	// Middleware setup
-	app.use(express.logger());				// Enable request logging	
+	//app.use(express.logger());				// Enable request logging	
 	app.use(express.bodyParser());		// parses urlencoded request bodies which populates req.body
 	app.use(express.methodOverride());	// sets a hidden input of _method to an arbitrary HTTP method 
 	app.use(express.cookieParser());	// Required by session
